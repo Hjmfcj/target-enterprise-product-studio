@@ -1,0 +1,263 @@
+**Minutes of Meeting (MoM)**
+
+**Project**
+
+MTN Sudan Travel Mission Management System
+
+**Meeting Purpose**
+
+Review and validate the proposed workflow, business requirements, and Prototype of the Travel Mission Management System.
+
+**Introduction**
+
+Target Team would like to thank the MTN Sudan team for their valuable time, active participation, and constructive feedback during the session. The discussion provided important insights that will help ensure the solution aligns with MTN Sudan business processes and operational requirements.
+
+**Confirmed Workflow**
+
+The workflow was reviewed and agreed as follows:
+
+Mission Request
+→ Line Manager Approval
+→ Division Manager / GM Approval
+→ Travel Review
+→ GL Review
+→ Treasury Payment
+→ Mission Active
+→ Mission Extension (Optional)
+→ Mission Closure
+→ Finance Settlement
+→ Mission Completed
+
+**Notes**
+
+	- Rejected requests will be marked as Rejected and archived.
+
+	- GL Review must take place before Treasury Payment.
+
+	- Mission Extension will follow the same review and approval cycle as the original mission.
+
+	- Treasury is responsible for payment processing only.
+
+**Key Decisions**
+
+**1. Mission Request Information**
+
+It was agreed that the system should clearly distinguish between:
+
+	- Assigned Person (Coordinator / Request Creator)
+
+	- Employee Name (Employee traveling on the mission)
+
+An Employee Name field will be added to the Mission Request form.
+
+**2. Mission Categories**
+
+The following categories were confirmed:
+
+	- Training
+
+	- Conference
+
+	- Job Mission
+
+Mission Types:
+
+	- National
+
+	- International
+
+**3. Currency Logic**
+
+The system will automatically determine the currency based on Mission Type:
+
+	- National Mission → SDG
+
+	- International Mission → USD
+
+**4. Cost Calculation**
+
+The following calculation approach was discussed and agreed:
+
+**Per Diem**
+
+Calculated based on the total number of mission days.
+
+**Accommodation**
+
+Calculated based on the total number of accommodation nights.
+
+Example discussed:
+
+	- 3 Mission Days
+
+	- 2 Accommodation Nights
+
+The exact calculation formulas and destination-based pricing matrix will be provided by MTN Sudan.
+
+**5. Roles ****&**** Permissions**
+
+The solution will use role-based permissions.
+
+Users will only be able to perform actions related to their responsibilities.
+
+Roles discussed include:
+
+	- Mission Creator
+
+	- Line Manager
+
+	- Division Manager / GM
+
+	- Travel Team
+
+	- GL Team
+
+	- Treasury Team
+
+**6. Travel Review**
+
+The Travel Team should be able to:
+
+	- Review
+
+	- Modify
+
+	- Reject
+
+	- Submit to GL
+
+**7. GL Review**
+
+The GL Team should be able to:
+
+	- Review
+
+	- Modify
+
+	- Reject
+
+	- Submit to Treasury
+
+GL Review must be completed before the request reaches Treasury.
+
+**8. Treasury Process**
+
+Treasury responsibilities include:
+
+	- Processing approved payments
+
+	- Marking missions as Paid
+
+Treasury does not perform approval or rejection actions once the request reaches this stage.
+
+**9. Notifications**
+
+The following was agreed:
+
+**Approval Notifications**
+
+Email notifications will be sent according to the workflow stage to:
+
+	- Line Manager
+
+	- Division Manager / GM
+
+	- Travel Team
+
+	- GL Team
+
+	- Treasury Team
+
+**Payment Notifications**
+
+After payment is processed by Treasury:
+
+	- The employee should be notified.
+
+	- Authorized users should be able to view the updated status through the Dashboard.
+
+**Dashboard Visibility**
+
+Mission statuses and progress should be visible through the Dashboard.
+
+**10. Mission Extension**
+
+The following requirements were agreed:
+
+	- Extension requests must recalculate Per Diem and Accommodation values.
+
+	- Extensions must pass through the same workflow and approval cycle.
+
+	- The system must record who performed the extension.
+
+	- Extension history should remain traceable and auditable.
+
+**11. Mission Closure ****&**** Settlement**
+
+Discussion confirmed that:
+
+	- Mission Closure and Settlement should remain available after mission completion.
+
+	- Settlement activities may continue after the mission has ended.
+
+	- Closure information and supporting evidence will be used during the settlement process.
+
+**12. HR Participation**
+
+The team discussed HR involvement and reporting requirements.
+
+It was agreed that an HR representative should participate in the next session to validate:
+
+	- HR reporting requirements
+
+	- HR visibility requirements
+
+	- HR notification requirements
+
+**13. Platform ****&**** Deployment**
+
+MTN Sudan confirmed the preference to implement the solution directly on the Microsoft 365 / SharePoint environment to align with existing systems and avoid duplicate effort.
+
+**Open Items**
+
+|  | **Item** | **Owner** |
+| --- | --- | --- |
+| 1 | Destination Pricing Matrix | MTN Sudan |
+| 2 | Per Diem Calculation Formula | MTN Sudan |
+| 3 | Accommodation Calculation Formula | MTN Sudan |
+| 4 | HR Notification Requirements | MTN Sudan |
+| 5 | HR Reporting & Visibility Requirements | MTN Sudan |
+
+**Action Items**
+
+|  | **Action Item** | **Owner** |
+| --- | --- | --- |
+| 1 | Add Employee Name field to Mission Request | Target |
+| 2 | Update workflow to include GL Review before Treasury Payment | Target |
+| 3 | Implement Extension Tracking (Extended By) | Target |
+| 4 | Implement role-based permissions | Target |
+| 5 | Update Prototype based on meeting feedback | Target |
+| 6 | Validate HR requirements in the next session | MTN Sudan & Target |
+
+**Next Steps**
+
+	- Update the Prototype based on the agreed feedback.
+
+	- Configure workflow updates.
+
+	- Review HR requirements during the next workshop.
+
+	- Continue refining the solution based on MTN Sudan feedback.
+
+**Note**
+
+Target Team would like to sincerely thank the MTN Sudan team for their collaboration, valuable feedback, and active participation throughout the session.
+
+The discussion was highly productive and provided important guidance that will help ensure the solution accurately reflects MTN Sudan’s operational processes and business requirements.
+
+We look forward to continuing our collaboration during the upcoming sessions.
+
+Best Regards,
+
+**Target Team**
+**MTN Sudan Travel Mission Management System Project**

@@ -1,0 +1,109 @@
+**Minutes of Meeting — Daily Scrum**
+
+**Project:** MTN Sudan – Mission Management System 
+
+**Date:** June 28, 2026 
+
+**Type:** Daily Standup
+
+ **Facilitator:** Shehabeldin Yehia
+
+**Attendees**
+
+| **Name** | **Role** |
+| --- | --- |
+|  |  |
+| Mohamed Bayoumi | Developer backend |
+| Hassan Mohamed | Developer front-end |
+| Mostafa Abdelmageed | Team lead |
+| Asmaa Hamrawy | UX/UI senior |
+| Walaa Hamdy | Backend team lead |
+| Abdelrahman Hamdy | QA |
+| Shehabeldin Yehia | PO |
+
+**Updates by Team Member**
+
+**Hassan Mohamed**
+
+- Completed structure setup for the portal and uploaded it.
+
+- Will begin active development on the portal next.
+
+- Confirmed understanding of the group-based access control approach: a dedicated SharePoint/portal group will be created; only members of that group will have access to portal functionality. Anyone outside the group will not see or access it.
+
+**Mohamed Bayoumi**
+
+- Completed the list/library configuration required for the Mission module to operate correctly. Includes the previously defined Mission-specific list structure.
+
+- Minor adjustments remain; pending confirmation from Walaa before signaling Hassan to proceed.
+
+- Next: coordinate with Walaa on the remaining additions to the list, then hand off to Hassan.
+
+**Walaa Hamdy**
+
+- Identified a few additional items needed related to the list structure.
+
+- Pending confirmation; will align with Bayoumi and notify Hassan when ready to proceed.
+
+**Abdelrahman Hamdy (QA)**
+
+- Received handover from Engineer Omar.
+
+- Completed the test cases for the form (partially written by Omar, completed by Abdelrahman).
+
+- Any unclear items will be flagged to Shehabeldin directly.
+
+**Asmaa Hamrawy (UX/UI)**
+
+- Has ready Figma assets (MTN logo, main brand colors).
+
+- Will prepare and share the updated assets with the team.
+
+- Figma subscription required to use a browser extension for Loveable-to-Figma conversion — coordinating with Engineer Abdullah (subscription holder). If Abdullah is unavailable, Mostafa will test using his own account.
+
+**Mostafa Abdelmageed**
+
+- Found a method to convert the Lovable prototype to Figma format.
+
+- Will test the browser extension on his own account while awaiting Abdullah's availability.
+
+- Will receive the Lovable link from Shehabeldin to begin the UI conversion.
+
+**Decisions**
+
+| **#** | **Decision** |
+| --- | --- |
+| 1 | Access control will be group-based — a specific portal group will be created and members assigned manually. No open sign-in access. |
+| 2 | Mostafa will attempt the Lovable-to-Figma conversion using his own account if Abdullah is unavailable. |
+| 3 | Asmaa will share ready MTN brand assets (logo + colors) with the team immediately. |
+
+**Action Items**
+
+| **#** | **Action** | **Owner** | **Due** |
+| --- | --- | --- | --- |
+| 1 | Send Lovable prototype link to Mostafa for UI conversion | Shehabeldin | Today |
+| 2 | Share ready MTN Figma assets (logo + brand colors) with team | Asmaa | Today |
+| 3 | Test Lovable-to-Figma browser extension | Mostafa | Today |
+| 4 | Finalize and confirm remaining list additions | Walaa + Bayoumi | Today |
+| 5 | Notify Hassan when list is confirmed and ready | Walaa / Bayoumi | Today |
+| 6 | Continue portal development once list confirmation received | Hassan | Next |
+| 7 | Flag any unclear test case items | Abdelrahman | Ongoing |
+
+**Blockers**
+
+| **#** | **Blocker** | **Owner** |
+| --- | --- | --- |
+| 1 | Figma subscription required for browser extension — Abdullah not available | Mostafa (workaround in progress) |
+| 2 | List additions not yet confirmed — Hassan cannot proceed until Walaa/Bayoumi sign off | Walaa + Bayoumi |
+
+**Next Steps**
+
+- Walaa and Bayoumi to finalize list structure and confirm to Hassan.
+
+- Shehabeldin to send Lovable  link to Mostafa.
+
+- Asmaa to share MTN brand assets.
+
+- Mostafa to attempt Figma conversion and report back.
+
+- Abdelrahman to continue QA test cases and escalate blockers as needed.

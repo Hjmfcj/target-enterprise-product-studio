@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTN Sudan – Travel Mission Management System – UX Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  :root {
+    --mtn-yellow: #FFCB00;
+    --mtn-yellow-dark: #E6B800;
+    --mtn-yellow-light: #FFF8D6;
+    --mtn-black: #1A1A1A;
+    --mtn-dark: #232323;
+    --mtn-gray: #F4F4F4;
+    --mtn-gray-mid: #E8E8E8;
+    --mtn-gray-dark: #888;
+    --mtn-text: #2B2B2B;
+    --mtn-text-muted: #6B7280;
+    --mtn-success: #16A34A;
+    --mtn-success-bg: #DCFCE7;
+    --mtn-warning: #D97706;
+    --mtn-warning-bg: #FEF3C7;
+    --mtn-danger: #DC2626;
+    --mtn-danger-bg: #FEE2E2;
+    --mtn-info: #2563EB;
+    --mtn-info-bg: #DBEAFE;
+    --mtn-pending: #7C3AED;
+    --mtn-pending-bg: #EDE9FE;
+    --sidebar-w: 240px;
+    --topbar-h: 64px;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F0F2F5; color: var(--mtn-text); line-height: 1.5; }
+
+  /* ── Navigation ── */
+  .toc { background: var(--mtn-black); color: #fff; padding: 2rem; }
+  .toc-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; }
+  .toc-logo-badge { background: var(--mtn-yellow); color: var(--mtn-black); font-weight: 700; font-size: 18px; padding: 6px 14px; border-radius: 50px; letter-spacing: 1px; }
+  .toc-title { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+  .toc-title strong { display: block; color: #fff; font-size: 18px; font-family: 'Space Grotesk', sans-serif; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .toc-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.05); cursor: pointer; text-decoration: none; color: rgba(255,255,255,0.8); font-size: 13px; transition: background 0.15s; }
+  .toc-item:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .toc-num { font-size: 11px; background: var(--mtn-yellow); color: var(--mtn-black); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+
+  /* ── Section Wrappers ── */
+  .section { padding: 3rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+  .section + .section { border-top: 1px solid var(--mtn-gray-mid); }
+  .section-header { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mtn-yellow-dark); margin-bottom: 6px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: var(--mtn-black); }
+  .section-desc { font-size: 14px; color: var(--mtn-text-muted); margin-top: 6px; max-width: 680px; }
+
+  /* ── Cards ── */
+  .card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem; }
+  .card-sm { background: #fff; border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 1rem 1.25rem; }
+
+  /* ── Tags ── */
+  .tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 50px; }
+  .tag-yellow { background: var(--mtn-yellow-light); color: #856800; }
+  .tag-success { background: var(--mtn-success-bg); color: var(--mtn-success); }
+  .tag-danger { background: var(--mtn-danger-bg); color: var(--mtn-danger); }
+  .tag-info { background: var(--mtn-info-bg); color: var(--mtn-info); }
+  .tag-warning { background: var(--mtn-warning-bg); color: var(--mtn-warning); }
+  .tag-pending { background: var(--mtn-pending-bg); color: var(--mtn-pending); }
+  .tag-gray { background: #F3F4F6; color: #4B5563; }
+
+  /* ── IA Tree ── */
+  .ia-tree { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .ia-node { border-radius: var(--radius); border: 1.5px solid var(--mtn-gray-mid); overflow: hidden; }
+  .ia-node-head { background: var(--mtn-black); color: #fff; padding: 10px 14px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .ia-node-head i { color: var(--mtn-yellow); font-size: 16px; }
+  .ia-node-body { padding: 10px 14px; }
+  .ia-node-item { font-size: 12px; color: var(--mtn-text-muted); padding: 4px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 6px; }
+  .ia-node-item:last-child { border-bottom: none; }
+  .ia-node-item i { font-size: 13px; color: var(--mtn-gray-dark); }
+  .ia-role-badge { font-size: 10px; background: var(--mtn-yellow-light); color: #856800; padding: 1px 7px; border-radius: 50px; margin-left: auto; }
+
+  /* ── Wireframe Shell ── */
+  .wf-shell { border: 1.5px solid #D1D5DB; border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: var(--shadow-md); }
+  .wf-titlebar { background: #1A1A1A; height: 28px; display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+  .wf-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .wf-urlbar { flex: 1; background: rgba(255,255,255,0.08); height: 16px; border-radius: 3px; margin: 0 12px; }
+  .wf-body { display: flex; height: 520px; }
+  .wf-sidebar { width: 180px; background: #111; flex-shrink: 0; padding: 12px 0; }
+  .wf-sidebar-logo { height: 36px; background: var(--mtn-yellow); margin: 0 12px 12px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #111; }
+  .wf-nav-item { padding: 8px 14px; font-size: 11px; color: rgba(255,255,255,0.55); cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .wf-nav-item.active { background: rgba(255,203,0,0.15); color: var(--mtn-yellow); }
+  .wf-nav-group { font-size: 9px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; padding: 12px 14px 4px; }
+  .wf-main { flex: 1; background: #F4F5F7; overflow: hidden; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .wf-topbar { height: 40px; background: #fff; border-radius: 6px; display: flex; align-items: center; padding: 0 14px; gap: 10px; }
+  .wf-topbar-title { font-size: 13px; font-weight: 600; flex: 1; }
+  .wf-btn { height: 28px; border-radius: 4px; background: var(--mtn-yellow); font-size: 11px; font-weight: 600; padding: 0 12px; display: flex; align-items: center; gap: 5px; color: #111; border: none; cursor: pointer; }
+  .wf-btn-outline { background: transparent; border: 1.5px solid #D1D5DB; color: #555; }
+  .wf-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .wf-stat { background: #fff; border-radius: 6px; padding: 10px 12px; }
+  .wf-stat-num { font-size: 22px; font-weight: 700; color: var(--mtn-black); }
+  .wf-stat-lbl { font-size: 10px; color: #9CA3AF; margin-top: 2px; }
+  .wf-table-wrap { flex: 1; background: #fff; border-radius: 6px; overflow: hidden; }
+  .wf-table-head { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr; padding: 8px 12px; font-size: 10px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #F0F0F0; }
+  .wf-table-row { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr; padding: 8px 12px; font-size: 11px; border-bottom: 1px solid #F9FAFB; align-items: center; }
+  .wf-table-row:last-child { border-bottom: none; }
+  .skeleton { background: linear-gradient(90deg, #F0F0F0 25%, #E8E8E8 50%, #F0F0F0 75%); background-size: 200px 100%; border-radius: 3px; height: 10px; animation: shimmer 1.5s infinite; }
+  @keyframes shimmer { to { background-position: 200px 0; } }
+
+  /* ── Hi-Fi Screen ── */
+  .hifi-screen { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid #E5E7EB; }
+  .hifi-shell { display: flex; height: 620px; }
+  .hifi-sidebar { width: var(--sidebar-w); background: #0F0F0F; display: flex; flex-direction: column; }
+  .hifi-logo-area { padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .hifi-logo { display: flex; align-items: center; gap: 10px; }
+  .hifi-logo-badge { background: var(--mtn-yellow); color: #000; font-weight: 800; font-size: 13px; padding: 5px 11px; border-radius: 40px; letter-spacing: 1px; }
+  .hifi-logo-text { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+  .hifi-logo-text strong { display: block; color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 600; }
+  .hifi-nav { flex: 1; padding: 12px 0; overflow-y: auto; }
+  .hifi-nav-section { margin-bottom: 4px; }
+  .hifi-nav-label { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 1.5px; padding: 8px 20px 4px; }
+  .hifi-nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 20px; font-size: 12.5px; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.12s; position: relative; }
+  .hifi-nav-item:hover { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.85); }
+  .hifi-nav-item.active { background: rgba(255,203,0,0.1); color: var(--mtn-yellow); }
+  .hifi-nav-item.active::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--mtn-yellow); border-radius: 0 3px 3px 0; }
+  .hifi-nav-item i { font-size: 16px; }
+  .hifi-badge { background: var(--mtn-yellow); color: #000; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 50px; margin-left: auto; }
+  .hifi-nav-bottom { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .hifi-user { display: flex; align-items: center; gap: 10px; }
+  .hifi-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--mtn-yellow); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: #000; flex-shrink: 0; }
+  .hifi-user-info { flex: 1; min-width: 0; }
+  .hifi-user-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hifi-user-role { font-size: 10px; color: rgba(255,255,255,0.35); }
+  .hifi-content { flex: 1; background: #F2F4F7; overflow-y: auto; display: flex; flex-direction: column; }
+  .hifi-topbar { height: var(--topbar-h); background: #fff; border-bottom: 1px solid #EBEBEB; display: flex; align-items: center; padding: 0 24px; gap: 12px; flex-shrink: 0; }
+  .hifi-page-title { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; flex: 1; }
+  .hifi-page-body { padding: 24px; flex: 1; }
+  .hifi-kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
+  .hifi-kpi { background: #fff; border-radius: var(--radius); padding: 16px 20px; border: 1px solid #EBEBEB; }
+  .hifi-kpi-val { font-size: 26px; font-weight: 700; color: var(--mtn-black); font-family: 'Space Grotesk', sans-serif; }
+  .hifi-kpi-lbl { font-size: 12px; color: var(--mtn-text-muted); margin-top: 2px; }
+  .hifi-kpi-delta { font-size: 11px; display: flex; align-items: center; gap: 3px; margin-top: 8px; }
+  .delta-up { color: var(--mtn-success); }
+  .delta-down { color: var(--mtn-danger); }
+  .hifi-section-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--mtn-black); }
+  .hifi-table { background: #fff; border-radius: var(--radius); border: 1px solid #EBEBEB; overflow: hidden; }
+  .hifi-th { display: grid; grid-template-columns: 2fr 1.2fr 1fr 1fr 0.8fr; padding: 10px 16px; background: #FAFAFA; border-bottom: 1px solid #EBEBEB; font-size: 11px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; }
+  .hifi-tr { display: grid; grid-template-columns: 2fr 1.2fr 1fr 1fr 0.8fr; padding: 12px 16px; border-bottom: 1px solid #F9FAFB; font-size: 12.5px; align-items: center; transition: background 0.1s; }
+  .hifi-tr:hover { background: #FAFAFA; }
+  .hifi-tr:last-child { border-bottom: none; }
+  .mission-id { font-weight: 600; color: var(--mtn-info); }
+  .status-pill { font-size: 10.5px; font-weight: 500; padding: 3px 10px; border-radius: 50px; }
+  .sp-draft { background: #F3F4F6; color: #6B7280; }
+  .sp-pending-lm { background: var(--mtn-pending-bg); color: var(--mtn-pending); }
+  .sp-pending-dm { background: var(--mtn-warning-bg); color: var(--mtn-warning); }
+  .sp-pending-travel { background: #E0F2FE; color: #0369A1; }
+  .sp-pending-payment { background: #DCFCE7; color: #15803D; }
+  .sp-active { background: #DCFCE7; color: #15803D; }
+  .sp-extended { background: #FEF3C7; color: #92400E; }
+  .sp-closed { background: #F3F4F6; color: #374151; }
+  .sp-pending-settle { background: var(--mtn-pending-bg); color: var(--mtn-pending); }
+  .sp-completed { background: #D1FAE5; color: #065F46; }
+  .sp-rejected { background: var(--mtn-danger-bg); color: var(--mtn-danger); }
+
+  /* ── Form Screen ── */
+  .form-screen { background: #fff; border-radius: var(--radius); border: 1px solid #EBEBEB; overflow: hidden; }
+  .form-header { padding: 16px 20px; border-bottom: 1px solid #EBEBEB; display: flex; align-items: center; gap: 10px; }
+  .form-step-bar { display: flex; gap: 0; margin-bottom: 20px; }
+  .form-step { flex: 1; padding: 8px 0; text-align: center; font-size: 11px; font-weight: 500; border-bottom: 2px solid #E5E7EB; color: #9CA3AF; position: relative; }
+  .form-step.active { border-color: var(--mtn-yellow); color: var(--mtn-black); }
+  .form-step.done { border-color: var(--mtn-success); color: var(--mtn-success); }
+  .form-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-full { grid-column: 1/-1; }
+  .form-group label { font-size: 11px; font-weight: 600; color: var(--mtn-text-muted); display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-control { width: 100%; height: 36px; border: 1px solid #D1D5DB; border-radius: var(--radius-sm); padding: 0 10px; font-size: 12.5px; color: var(--mtn-text); background: #fff; font-family: 'Inter', sans-serif; }
+  .form-control:focus { outline: none; border-color: var(--mtn-yellow-dark); box-shadow: 0 0 0 3px rgba(255,203,0,0.15); }
+  .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+  .form-note { font-size: 11px; color: var(--mtn-text-muted); padding: 8px 10px; background: #FFF8D6; border-radius: var(--radius-sm); border-left: 3px solid var(--mtn-yellow); grid-column: 1/-1; }
+  .calc-preview { background: #F9FAFB; border-radius: var(--radius-sm); border: 1px solid #E5E7EB; padding: 12px 16px; }
+  .calc-row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; }
+  .calc-row.total { font-weight: 700; border-top: 1px solid #E5E7EB; padding-top: 8px; margin-top: 6px; font-size: 13px; }
+
+  /* ── Approval Screen ── */
+  .approval-card { background: #fff; border-radius: var(--radius); border: 1px solid #EBEBEB; overflow: hidden; margin-bottom: 14px; }
+  .approval-head { padding: 14px 16px; border-bottom: 1px solid #F3F4F6; display: flex; align-items: center; gap: 12px; }
+  .approval-info { flex: 1; }
+  .approval-name { font-size: 13px; font-weight: 600; }
+  .approval-meta { font-size: 11px; color: var(--mtn-text-muted); margin-top: 2px; }
+  .approval-body { padding: 14px 16px; display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .approval-field label { font-size: 10px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 3px; }
+  .approval-field span { font-size: 12.5px; color: var(--mtn-text); }
+  .approval-footer { padding: 10px 16px; background: #FAFAFA; border-top: 1px solid #F3F4F6; display: flex; justify-content: flex-end; gap: 8px; }
+  .btn-approve { background: var(--mtn-success); color: #fff; border: none; border-radius: var(--radius-sm); padding: 7px 16px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .btn-reject { background: #fff; color: var(--mtn-danger); border: 1px solid #FCA5A5; border-radius: var(--radius-sm); padding: 7px 16px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .btn-primary { background: var(--mtn-yellow); color: #000; border: none; border-radius: var(--radius-sm); padding: 8px 18px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+
+  /* ── Workflow Tracker ── */
+  .workflow-track { display: flex; align-items: center; gap: 0; padding: 16px 20px; overflow-x: auto; }
+  .wf-step { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 90px; position: relative; }
+  .wf-step:not(:last-child)::after { content: ''; position: absolute; top: 16px; left: 60%; width: calc(100% - 20px); height: 2px; background: #E5E7EB; z-index: 0; }
+  .wf-step.done::after, .wf-step.active::after { background: var(--mtn-yellow); }
+  .wf-step-icon { width: 32px; height: 32px; border-radius: 50%; background: #E5E7EB; color: #9CA3AF; display: flex; align-items: center; justify-content: center; font-size: 14px; z-index: 1; border: 2px solid #E5E7EB; }
+  .wf-step.done .wf-step-icon { background: var(--mtn-yellow); color: #000; border-color: var(--mtn-yellow); }
+  .wf-step.active .wf-step-icon { background: #fff; color: var(--mtn-yellow-dark); border-color: var(--mtn-yellow); box-shadow: 0 0 0 3px rgba(255,203,0,0.2); }
+  .wf-step-lbl { font-size: 10px; font-weight: 500; color: #9CA3AF; text-align: center; }
+  .wf-step.done .wf-step-lbl, .wf-step.active .wf-step-lbl { color: var(--mtn-text); }
+
+  /* ── Settlement ── */
+  .settle-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+  .settle-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .settle-table th { background: #FAFAFA; padding: 8px 12px; text-align: left; font-size: 10px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #EBEBEB; }
+  .settle-table td { padding: 10px 12px; border-bottom: 1px solid #F9FAFB; }
+  .settle-table tr:last-child td { border-bottom: none; }
+  .balance-card { background: #fff; border-radius: var(--radius); border: 1px solid #EBEBEB; padding: 20px; }
+  .balance-positive { background: var(--mtn-success-bg); color: var(--mtn-success); font-size: 22px; font-weight: 700; padding: 12px 16px; border-radius: var(--radius-sm); text-align: center; margin: 10px 0; }
+  .balance-negative { background: var(--mtn-danger-bg); color: var(--mtn-danger); font-size: 22px; font-weight: 700; padding: 12px 16px; border-radius: var(--radius-sm); text-align: center; margin: 10px 0; }
+  .balance-zero { background: #F3F4F6; color: #374151; font-size: 22px; font-weight: 700; padding: 12px 16px; border-radius: var(--radius-sm); text-align: center; margin: 10px 0; }
+
+  /* ── Design System ── */
+  .ds-section { margin-bottom: 2.5rem; }
+  .ds-label { font-size: 13px; font-weight: 600; color: var(--mtn-text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-size: 11px; }
+  .color-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch { width: 56px; border-radius: var(--radius-sm); overflow: hidden; }
+  .swatch-color { height: 40px; }
+  .swatch-name { font-size: 10px; color: var(--mtn-text-muted); margin-top: 4px; text-align: center; }
+  .type-specimen { border-left: 3px solid var(--mtn-yellow); padding-left: 16px; margin-bottom: 12px; }
+  .component-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 16px; background: #F9FAFB; border-radius: var(--radius-sm); margin-bottom: 10px; }
+  .spacing-scale { display: flex; gap: 8px; align-items: flex-end; }
+  .spacing-box { background: var(--mtn-yellow); border-radius: 2px; }
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
+  .icon-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 8px; background: #F9FAFB; border-radius: var(--radius-sm); }
+  .icon-item i { font-size: 22px; color: var(--mtn-black); }
+  .icon-item span { font-size: 10px; color: var(--mtn-text-muted); text-align: center; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .hifi-sidebar { display: none; }
+    .hifi-kpi-grid { grid-template-columns: 1fr 1fr; }
+    .wf-stats { grid-template-columns: 1fr 1fr; }
+    .wf-body { flex-direction: column; }
+    .wf-sidebar { width: 100%; height: auto; }
+    .section { padding: 2rem 1.25rem; }
+    .ia-tree { grid-template-columns: 1fr; }
+  }
+
+  /* ── Misc ── */
+  .divider { height: 1px; background: var(--mtn-gray-mid); margin: 0; }
+  .highlight-bar { background: var(--mtn-yellow-light); border-left: 4px solid var(--mtn-yellow); padding: 10px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; margin-bottom: 16px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+  .flow-step-row { display: flex; flex-direction: column; gap: 8px; }
+  .flow-step-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 14px; background: #fff; border-radius: var(--radius-sm); border: 1px solid #EBEBEB; }
+  .flow-step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--mtn-yellow); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #000; flex-shrink: 0; margin-top: 1px; }
+  .flow-step-text { font-size: 12.5px; }
+  .flow-step-actor { font-size: 10px; color: var(--mtn-text-muted); margin-top: 2px; }
+  .figma-component { background: #fff; border: 1px solid #EBEBEB; border-radius: var(--radius-sm); padding: 10px 14px; }
+  .figma-component-name { font-size: 11px; font-weight: 700; color: var(--mtn-text); font-family: monospace; }
+  .figma-component-props { font-size: 10px; color: var(--mtn-text-muted); margin-top: 4px; }
+  .figma-component-type { font-size: 10px; background: var(--mtn-pending-bg); color: var(--mtn-pending); padding: 1px 7px; border-radius: 50px; display: inline-block; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- NAVIGATION -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="toc">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="toc-logo">
+      <div class="toc-logo-badge">MTN</div>
+      <div class="toc-title">
+        <strong>Travel Mission Management System</strong>
+        Complete UI/UX Design Specification · MTN Sudan
+      </div>
+    </div>
+    <div class="toc-grid">
+      <a href="#s1" class="toc-item"><span class="toc-num">1</span>Information Architecture</a>
+      <a href="#s2" class="toc-item"><span class="toc-num">2</span>User Flow</a>
+      <a href="#s3" class="toc-item"><span class="toc-num">3</span>Low-Fidelity Wireframes</a>
+      <a href="#s4" class="toc-item"><span class="toc-num">4</span>High-Fidelity UI Screens</a>
+      <a href="#s5" class="toc-item"><span class="toc-num">5</span>Figma Component Structure</a>
+      <a href="#s6" class="toc-item"><span class="toc-num">6</span>Design System</a>
+      <a href="#s7" class="toc-item"><span class="toc-num">7</span>Figma-Ready Layouts</a>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- SECTION 1: INFORMATION ARCHITECTURE -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="s1" class="section">
+  <div class="section-header">
+    <div class="section-label">Section 01</div>
+    <div class="section-title">Information Architecture</div>
+    <div class="section-desc">Hierarchical structure of all navigation nodes, screens, and role-based access per the requirements document.</div>
+  </div>
+
+  <div class="highlight-bar">
+    <strong>7 User Roles</strong> — Assigned Person · Line Manager · Division Manager · Travel Team · Treasury · Finance · HR
+  </div>
+
+  <div class="ia-tree">
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-chart-bar"></i>Mission statistics <span class="ia-role-badge">All</span></div>
+        <div class="ia-node-item"><i class="ti ti-bell"></i>Pending actions</div>
+        <div class="ia-node-item"><i class="ti ti-activity"></i>Recent activity</div>
+      </div>
+    </div>
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-briefcase"></i>Mission Management</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-list"></i>Mission List <span class="ia-role-badge">Person</span></div>
+        <div class="ia-node-item"><i class="ti ti-plus"></i>Create Mission</div>
+        <div class="ia-node-item"><i class="ti ti-user"></i>My Missions</div>
+        <div class="ia-node-item"><i class="ti ti-eye"></i>Mission Details</div>
+      </div>
+    </div>
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-check"></i>Approvals</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-clock"></i>Pending Approvals <span class="ia-role-badge">LM / DM</span></div>
+        <div class="ia-node-item"><i class="ti ti-x"></i>Reject with Reason</div>
+        <div class="ia-node-item"><i class="ti ti-archive"></i>Archived (Rejected)</div>
+      </div>
+    </div>
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-plane"></i>Travel Review</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-currency-dollar"></i>Travel Cost Review <span class="ia-role-badge">Travel</span></div>
+        <div class="ia-node-item"><i class="ti ti-calculator"></i>Per diem entry</div>
+        <div class="ia-node-item"><i class="ti ti-bed"></i>Accommodation entry</div>
+      </div>
+    </div>
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-building-bank"></i>Treasury</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-credit-card"></i>Payments <span class="ia-role-badge">Treasury</span></div>
+        <div class="ia-node-item"><i class="ti ti-cash"></i>Confirm payment</div>
+        <div class="ia-node-item"><i class="ti ti-receipt"></i>Payment records</div>
+      </div>
+    </div>
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-lock"></i>Mission Closure</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-flag"></i>Mission Closure <span class="ia-role-badge">Person</span></div>
+        <div class="ia-node-item"><i class="ti ti-calendar-plus"></i>Mission Extensions</div>
+        <div class="ia-node-item"><i class="ti ti-upload"></i>Upload documents</div>
+      </div>
+    </div>
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-scale"></i>Finance</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-calculator"></i>Settlements <span class="ia-role-badge">Finance</span></div>
+        <div class="ia-node-item"><i class="ti ti-checklist"></i>Review checklist</div>
+        <div class="ia-node-item"><i class="ti ti-arrow-right-left"></i>Debit/Credit balance</div>
+      </div>
+    </div>
+    <div class="ia-node">
+      <div class="ia-node-head"><i class="ti ti-report"></i>Reports</div>
+      <div class="ia-node-body">
+        <div class="ia-node-item"><i class="ti ti-history"></i>Employee Mission History <span class="ia-role-badge">Finance</span></div>
+        <div class="ia-node-item"><i class="ti ti-arrows-exchange"></i>Debit / Credit Report</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;">
+    <div class="section-label" style="margin-bottom:12px;">Mission Status Lifecycle</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <span class="status-pill sp-draft">Draft</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-pending-lm">Pending Line Mgr</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-pending-dm">Pending Div. Mgr</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-pending-travel">Pending Travel Review</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-pending-payment">Pending Payment</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-active">Mission Active</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;padding-left:32px;">
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-extended">Mission Extended</span>
+      <span style="font-size:11px;color:#9CA3AF;">(optional)</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-closed">Mission Closed</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-pending-settle">Pending Settlement</span>
+      <i class="ti ti-arrow-right" style="color:#9CA3AF;font-size:13px;"></i>
+      <span class="status-pill sp-completed">Completed</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px;padding-left:32px;">
+      <span class="status-pill sp-rejected">Rejected</span>
+      <span style="font-size:11px;color:#9CA3AF;">— from any pre-payment stage; archived</span>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;">
+    <div class="section-label" style="margin-bottom:12px;">Business Control Rules</div>
+    <div class="two-col">
+      <div class="card-sm" style="border-left:3px solid var(--mtn-danger);">
+        <div style="font-size:12px;font-weight:600;color:var(--mtn-danger);margin-bottom:4px;"><i class="ti ti-forbid"></i> Control 1</div>
+        <div style="font-size:12.5px;">An employee <strong>cannot create</strong> a new mission request if they have any existing open (non-closed) mission.</div>
+      </div>
+      <div class="card-sm" style="border-left:3px solid var(--mtn-info);">
+        <div style="font-size:12px;font-weight:600;color:var(--mtn-info);margin-bottom:4px;"><i class="ti ti-info-circle"></i> Control 2</div>
+        <div style="font-size:12.5px;">Mission types: <strong>National</strong> (local currency) and <strong>International</strong> (foreign currency, USD/EUR based on destination).</div>
+      </div>
+      <div class="card-sm" style="border-left:3px solid var(--mtn-warning);">
+        <div style="font-size:12px;font-weight:600;color:var(--mtn-warning);margin-bottom:4px;"><i class="ti ti-calendar-plus"></i> Control 3</div>
+        <div style="font-size:12.5px;">Long-term missions are handled as <strong>separate monthly missions</strong> — each month is its own closed cycle.</div>
+      </div>
+      <div class="card-sm" style="border-left:3px solid var(--mtn-success);">
+        <div style="font-size:12px;font-weight:600;color:var(--mtn-success);margin-bottom:4px;"><i class="ti ti-list-check"></i> Control 4</div>
+        <div style="font-size:12.5px;"><strong>Destination list</strong> is configurable by the Travel Team. Supports all Sudanese cities and international countries.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- SECTION 2: USER FLOW -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="s2" class="section">
+  <div class="section-header">
+    <div class="section-label">Section 02</div>
+    <div class="section-title">User Flow</div>
+    <div class="section-desc">End-to-end process flow for a mission request, from creation through financial settlement.</div>
+  </div>
+
+  <div class="three-col" style="margin-bottom:1.5rem;">
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">Phase 1 — Request & Approval</div>
+      <div class="flow-step-row">
+        <div class="flow-step-item"><div class="flow-step-num">1</div><div><div class="flow-step-text">Assigned Person creates mission request (type, destination, dates, notes)</div><div class="flow-step-actor">Actor: Assigned Person</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">2</div><div><div class="flow-step-text">System validates: no open mission exists for this employee</div><div class="flow-step-actor">Actor: System (auto)</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">3</div><div><div class="flow-step-text">Line Manager (Senior Manager) receives notification and approves / rejects</div><div class="flow-step-actor">Actor: Line Manager</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">4</div><div><div class="flow-step-text">Division Manager receives notification and approves / rejects</div><div class="flow-step-actor">Actor: Division Manager</div></div></div>
+        <div class="flow-step-item" style="border-left:2px solid var(--mtn-danger);"><div class="flow-step-num" style="background:var(--mtn-danger);color:#fff;">✕</div><div><div class="flow-step-text">If rejected at any stage → mission archived, employee notified</div><div class="flow-step-actor">Cancel rule applied</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">Phase 2 — Travel & Payment</div>
+      <div class="flow-step-row">
+        <div class="flow-step-item"><div class="flow-step-num">5</div><div><div class="flow-step-text">Travel Team reviews request, enters per diem, accommodation, and transport costs</div><div class="flow-step-actor">Actor: Travel Team</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">6</div><div><div class="flow-step-text">Finance GL records the amounts; HR logs employee absence</div><div class="flow-step-actor">Actor: Finance / HR</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">7</div><div><div class="flow-step-text">Treasury confirms payment and disburses advance to employee</div><div class="flow-step-actor">Actor: Treasury</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">8</div><div><div class="flow-step-text">Employee notified — mission becomes Active</div><div class="flow-step-actor">Actor: System notification</div></div></div>
+        <div class="flow-step-item" style="border-left:2px solid var(--mtn-warning);"><div class="flow-step-num" style="background:var(--mtn-warning);color:#fff;">↺</div><div><div class="flow-step-text">Optional: Assigned Person requests extension → re-approval cycle</div><div class="flow-step-actor">Actor: Assigned Person → Managers</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">Phase 3 — Closure & Settlement</div>
+      <div class="flow-step-row">
+        <div class="flow-step-item"><div class="flow-step-num">9</div><div><div class="flow-step-text">Assigned Person closes mission and uploads supporting invoices/documents</div><div class="flow-step-actor">Actor: Assigned Person</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">10</div><div><div class="flow-step-text">Travel Team (Ms. Abeer) approves final amount based on submitted documents</div><div class="flow-step-actor">Actor: Travel Team</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">11</div><div><div class="flow-step-text">Finance (Ms. Huda) reviews checklist: credit/debit balance, invoices, mission status</div><div class="flow-step-actor">Actor: Finance</div></div></div>
+        <div class="flow-step-item"><div class="flow-step-num">12</div><div><div class="flow-step-text">Finance processes settlement — balance cleared or debit noted on employee account</div><div class="flow-step-actor">Actor: Finance</div></div></div>
+        <div class="flow-step-item" style="border-left:2px solid var(--mtn-success);"><div class="flow-step-num" style="background:var(--mtn-success);color:#fff;">✓</div><div><div class="flow-step-text">Mission status → Completed. Reports generated.</div><div class="flow-step-actor">Final state</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- SECTION 3: LOW-FIDELITY WIREFRAMES -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="s3" class="section">
+  <div class="section-header">
+    <div class="section-label">Section 03</div>
+    <div class="section-title">Low-Fidelity Wireframes</div>
+    <div class="section-desc">Structural layout of key screens showing content zones, navigation, and data hierarchy.</div>
+  </div>
+
+  <!-- Dashboard Wireframe -->
+  <div style="margin-bottom:2rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 1 — Dashboard (All Users)</div>
+    <div class="wf-shell">
+      <div class="wf-titlebar">
+        <div class="wf-dot" style="background:#FF5F57;"></div>
+        <div class="wf-dot" style="background:#FFBD2E;"></div>
+        <div class="wf-dot" style="background:#28CA42;"></div>
+        <div class="wf-urlbar"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-sidebar">
+          <div class="wf-sidebar-logo">MTN</div>
+          <div class="wf-nav-item active"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+          <div class="wf-nav-group">Missions</div>
+          <div class="wf-nav-item"><i class="ti ti-list"></i> Mission List</div>
+          <div class="wf-nav-item"><i class="ti ti-plus"></i> Create Mission</div>
+          <div class="wf-nav-group">Workflows</div>
+          <div class="wf-nav-item"><i class="ti ti-check"></i> Approvals</div>
+          <div class="wf-nav-item"><i class="ti ti-plane"></i> Travel Review</div>
+          <div class="wf-nav-item"><i class="ti ti-building-bank"></i> Payments</div>
+          <div class="wf-nav-group">Finance</div>
+          <div class="wf-nav-item"><i class="ti ti-lock"></i> Closure</div>
+          <div class="wf-nav-item"><i class="ti ti-scale"></i> Settlements</div>
+          <div class="wf-nav-item"><i class="ti ti-report"></i> Reports</div>
+        </div>
+        <div class="wf-main">
+          <div class="wf-topbar">
+            <div class="wf-topbar-title">Dashboard</div>
+            <div class="wf-btn"><i class="ti ti-plus"></i> New Mission</div>
+          </div>
+          <div class="wf-stats">
+            <div class="wf-stat"><div class="wf-stat-num" style="color:#2563EB;">12</div><div class="wf-stat-lbl">Active Missions</div></div>
+            <div class="wf-stat"><div class="wf-stat-num" style="color:#7C3AED;">5</div><div class="wf-stat-lbl">Pending Approval</div></div>
+            <div class="wf-stat"><div class="wf-stat-num" style="color:#D97706;">3</div><div class="wf-stat-lbl">Pending Settlement</div></div>
+            <div class="wf-stat"><div class="wf-stat-num" style="color:#16A34A;">48</div><div class="wf-stat-lbl">Completed (YTD)</div></div>
+          </div>
+          <div class="wf-table-wrap">
+            <div style="padding:10px 12px;font-size:11px;font-weight:600;border-bottom:1px solid #F0F0F0;display:flex;align-items:center;justify-content:space-between;">
+              <span>Recent Missions</span>
+              <div style="display:flex;gap:6px;">
+                <div class="skeleton" style="width:60px;"></div>
+                <div class="skeleton" style="width:60px;"></div>
+              </div>
+            </div>
+            <div class="wf-table-head"><span>Mission / Employee</span><span>Destination</span><span>Dates</span><span>Status</span><span>Actions</span></div>
+            <div class="wf-table-row"><div><div class="skeleton" style="width:80px;margin-bottom:4px;"></div><div class="skeleton" style="width:120px;"></div></div><div class="skeleton" style="width:70px;"></div><div class="skeleton" style="width:80px;"></div><div class="skeleton" style="width:60px;"></div><div class="skeleton" style="width:40px;"></div></div>
+            <div class="wf-table-row"><div><div class="skeleton" style="width:80px;margin-bottom:4px;"></div><div class="skeleton" style="width:110px;"></div></div><div class="skeleton" style="width:70px;"></div><div class="skeleton" style="width:80px;"></div><div class="skeleton" style="width:60px;"></div><div class="skeleton" style="width:40px;"></div></div>
+            <div class="wf-table-row"><div><div class="skeleton" style="width:80px;margin-bottom:4px;"></div><div class="skeleton" style="width:130px;"></div></div><div class="skeleton" style="width:70px;"></div><div class="skeleton" style="width:80px;"></div><div class="skeleton" style="width:60px;"></div><div class="skeleton" style="width:40px;"></div></div>
+            <div class="wf-table-row"><div><div class="skeleton" style="width:80px;margin-bottom:4px;"></div><div class="skeleton" style="width:100px;"></div></div><div class="skeleton" style="width:70px;"></div><div class="skeleton" style="width:80px;"></div><div class="skeleton" style="width:60px;"></div><div class="skeleton" style="width:40px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Mission Wireframe -->
+  <div style="margin-bottom:2rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 2 — Create Mission Form (Assigned Person)</div>
+    <div class="wf-shell">
+      <div class="wf-titlebar">
+        <div class="wf-dot" style="background:#FF5F57;"></div>
+        <div class="wf-dot" style="background:#FFBD2E;"></div>
+        <div class="wf-dot" style="background:#28CA42;"></div>
+        <div class="wf-urlbar"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-sidebar">
+          <div class="wf-sidebar-logo">MTN</div>
+          <div class="wf-nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+          <div class="wf-nav-group">Missions</div>
+          <div class="wf-nav-item active"><i class="ti ti-plus"></i> Create Mission</div>
+        </div>
+        <div class="wf-main">
+          <div class="wf-topbar">
+            <div class="wf-topbar-title">Create Mission Request</div>
+            <div class="wf-btn wf-btn-outline">Cancel</div>
+            <div class="wf-btn">Submit</div>
+          </div>
+          <div style="background:#fff;border-radius:6px;flex:1;padding:14px;overflow:auto;">
+            <div style="display:flex;gap:4px;margin-bottom:14px;">
+              <div style="flex:1;padding:7px;text-align:center;font-size:10px;font-weight:600;background:var(--mtn-yellow);color:#111;border-radius:4px;">Mission Info</div>
+              <div style="flex:1;padding:7px;text-align:center;font-size:10px;color:#aaa;border:1px solid #e0e0e0;border-radius:4px;">Travel Details</div>
+              <div style="flex:1;padding:7px;text-align:center;font-size:10px;color:#aaa;border:1px solid #e0e0e0;border-radius:4px;">Review & Submit</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div><div class="skeleton" style="width:80px;height:8px;margin-bottom:6px;"></div><div class="skeleton" style="height:28px;"></div></div>
+              <div><div class="skeleton" style="width:80px;height:8px;margin-bottom:6px;"></div><div class="skeleton" style="height:28px;"></div></div>
+              <div><div class="skeleton" style="width:80px;height:8px;margin-bottom:6px;"></div><div class="skeleton" style="height:28px;"></div></div>
+              <div><div class="skeleton" style="width:80px;height:8px;margin-bottom:6px;"></div><div class="skeleton" style="height:28px;"></div></div>
+              <div style="grid-column:1/-1;"><div class="skeleton" style="width:80px;height:8px;margin-bottom:6px;"></div><div class="skeleton" style="height:28px;"></div></div>
+              <div style="grid-column:1/-1;background:#FFFFF0;border:1px solid #E5E7AB;border-radius:4px;padding:8px;"><div class="skeleton" style="width:60%;height:8px;margin-bottom:6px;"></div><div class="skeleton" style="width:40%;height:28px;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- SECTION 4: HIGH-FIDELITY UI SCREENS -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="s4" class="section">
+  <div class="section-header">
+    <div class="section-label">Section 04</div>
+    <div class="section-title">High-Fidelity UI Screens</div>
+    <div class="section-desc">Pixel-accurate screens using the MTN brand system with yellow (#FFCB00), dark sidebars, and clean data tables.</div>
+  </div>
+
+  <!-- HiFi Dashboard -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 4.1 — Dashboard (All Users)</div>
+    <div class="hifi-screen">
+      <div class="hifi-shell">
+        <div class="hifi-sidebar">
+          <div class="hifi-logo-area">
+            <div class="hifi-logo">
+              <div class="hifi-logo-badge">MTN</div>
+              <div class="hifi-logo-text"><strong>Travel Missions</strong>MTN Sudan</div>
+            </div>
+          </div>
+          <div class="hifi-nav">
+            <div class="hifi-nav-section">
+              <div class="hifi-nav-item active"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
+            </div>
+            <div class="hifi-nav-section">
+              <div class="hifi-nav-label">Mission Management</div>
+              <div class="hifi-nav-item"><i class="ti ti-list"></i>Mission List</div>
+              <div class="hifi-nav-item"><i class="ti ti-plus"></i>Create Mission</div>
+              <div class="hifi-nav-item"><i class="ti ti-user-circle"></i>My Missions</div>
+            </div>
+            <div class="hifi-nav-section">
+              <div class="hifi-nav-label">Workflows</div>
+              <div class="hifi-nav-item"><i class="ti ti-checks"></i>Approvals<span class="hifi-badge">5</span></div>
+              <div class="hifi-nav-item"><i class="ti ti-plane"></i>Travel Review</div>
+              <div class="hifi-nav-item"><i class="ti ti-building-bank"></i>Payments</div>
+            </div>
+            <div class="hifi-nav-section">
+              <div class="hifi-nav-label">Closure & Finance</div>
+              <div class="hifi-nav-item"><i class="ti ti-flag-3"></i>Mission Closure</div>
+              <div class="hifi-nav-item"><i class="ti ti-calendar-plus"></i>Extensions</div>
+              <div class="hifi-nav-item"><i class="ti ti-scale"></i>Settlements</div>
+            </div>
+            <div class="hifi-nav-section">
+              <div class="hifi-nav-label">Reports</div>
+              <div class="hifi-nav-item"><i class="ti ti-history"></i>Mission History</div>
+              <div class="hifi-nav-item"><i class="ti ti-arrows-exchange"></i>Debit/Credit</div>
+            </div>
+          </div>
+          <div class="hifi-nav-bottom">
+            <div class="hifi-user">
+              <div class="hifi-avatar">AH</div>
+              <div class="hifi-user-info">
+                <div class="hifi-user-name">Ahmed Hassan</div>
+                <div class="hifi-user-role">Assigned Person</div>
+              </div>
+              <i class="ti ti-settings" style="color:rgba(255,255,255,0.25);font-size:14px;"></i>
+            </div>
+          </div>
+        </div>
+        <div class="hifi-content">
+          <div class="hifi-topbar">
+            <div class="hifi-page-title">Dashboard</div>
+            <span class="tag tag-yellow"><i class="ti ti-calendar"></i>June 2025</span>
+            <button class="btn-primary"><i class="ti ti-plus"></i>New Mission</button>
+          </div>
+          <div class="hifi-page-body">
+            <div class="hifi-kpi-grid">
+              <div class="hifi-kpi">
+                <div class="hifi-kpi-lbl">Active Missions</div>
+                <div class="hifi-kpi-val" style="color:var(--mtn-info);">12</div>
+                <div class="hifi-kpi-delta delta-up"><i class="ti ti-trending-up"></i>+2 this week</div>
+              </div>
+              <div class="hifi-kpi">
+                <div class="hifi-kpi-lbl">Pending Approvals</div>
+                <div class="hifi-kpi-val" style="color:var(--mtn-pending);">5</div>
+                <div class="hifi-kpi-delta"><i class="ti ti-clock" style="color:#9CA3AF;"></i>Avg 1.2 days</div>
+              </div>
+              <div class="hifi-kpi">
+                <div class="hifi-kpi-lbl">Pending Settlement</div>
+                <div class="hifi-kpi-val" style="color:var(--mtn-warning);">3</div>
+                <div class="hifi-kpi-delta delta-down"><i class="ti ti-trending-down"></i>-1 from last month</div>
+              </div>
+              <div class="hifi-kpi">
+                <div class="hifi-kpi-lbl">Completed (YTD)</div>
+                <div class="hifi-kpi-val" style="color:var(--mtn-success);">48</div>
+                <div class="hifi-kpi-delta delta-up"><i class="ti ti-trending-up"></i>+8 vs last year</div>
+              </div>
+            </div>
+            <div class="hifi-section-title">Recent Missions</div>
+            <div class="hifi-table">
+              <div class="hifi-th"><span>Mission</span><span>Destination</span><span>Dates</span><span>Amount</span><span>Status</span></div>
+              <div class="hifi-tr">
+                <div><div class="mission-id">TRV-2025-0147</div><div style="font-size:11px;color:#6B7280;margin-top:2px;">Ahmed Hassan</div></div>
+                <div><i class="ti ti-map-pin" style="font-size:12px;color:#9CA3AF;"></i> Port Sudan</div>
+                <div style="font-size:11px;">Jun 10–15</div>
+                <div style="font-weight:600;">SDG 45,000</div>
+                <div><span class="status-pill sp-active">Active</span></div>
+              </div>
+              <div class="hifi-tr">
+                <div><div class="mission-id">TRV-2025-0146</div><div style="font-size:11px;color:#6B7280;margin-top:2px;">Sara Mohamed</div></div>
+                <div><i class="ti ti-map-pin" style="font-size:12px;color:#9CA3AF;"></i> Dubai, UAE</div>
+                <div style="font-size:11px;">Jun 8–12</div>
+                <div style="font-weight:600;">USD 1,200</div>
+                <div><span class="status-pill sp-pending-travel">Pending Travel</span></div>
+              </div>
+              <div class="hifi-tr">
+                <div><div class="mission-id">TRV-2025-0145</div><div style="font-size:11px;color:#6B7280;margin-top:2px;">Omar Osman</div></div>
+                <div><i class="ti ti-map-pin" style="font-size:12px;color:#9CA3AF;"></i> Khartoum</div>
+                <div style="font-size:11px;">Jun 1–30</div>
+                <div style="font-weight:600;">SDG 120,000</div>
+                <div><span class="status-pill sp-extended">Extended</span></div>
+              </div>
+              <div class="hifi-tr">
+                <div><div class="mission-id">TRV-2025-0144</div><div style="font-size:11px;color:#6B7280;margin-top:2px;">Hind Khalid</div></div>
+                <div><i class="ti ti-map-pin" style="font-size:12px;color:#9CA3AF;"></i> Medani</div>
+                <div style="font-size:11px;">May 20–25</div>
+                <div style="font-weight:600;">SDG 28,000</div>
+                <div><span class="status-pill sp-pending-settle">Pending Settle</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HiFi Create Mission -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 4.2 — Create Mission (Assigned Person)</div>
+    <div class="form-screen" style="max-width:800px;">
+      <div class="form-header">
+        <i class="ti ti-plus-circle" style="font-size:18px;color:var(--mtn-yellow-dark);"></i>
+        <div style="font-size:14px;font-weight:600;">Create Mission Request</div>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <button class="btn-reject" style="font-size:11px;padding:6px 14px;">Cancel</button>
+          <button class="btn-primary">Submit for Approval →</button>
+        </div>
+      </div>
+      <div class="form-step-bar">
+        <div class="form-step done">✓ Mission Info</div>
+        <div class="form-step active">Travel Details</div>
+        <div class="form-step">Review & Submit</div>
+      </div>
+      <div class="form-body">
+        <div class="form-group">
+          <label>Mission Type *</label>
+          <select class="form-control form-select">
+            <option>National (Domestic)</option>
+            <option>International</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mission Purpose *</label>
+          <select class="form-control form-select">
+            <option>Job Mission</option>
+            <option>Training</option>
+            <option>Conference</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Destination *</label>
+          <select class="form-control form-select">
+            <option>Port Sudan</option>
+            <option>Khartoum</option>
+            <option>Medani</option>
+            <option>Dubai, UAE</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Number of Days *</label>
+          <input class="form-control" type="number" value="5" min="1">
+        </div>
+        <div class="form-group">
+          <label>Mission Start Date *</label>
+          <input class="form-control" type="date" value="2025-06-15">
+        </div>
+        <div class="form-group">
+          <label>Mission End Date *</label>
+          <input class="form-control" type="date" value="2025-06-20">
+        </div>
+        <div class="form-group form-full">
+          <label>Notes / Additional Details</label>
+          <textarea class="form-control" style="height:60px;resize:none;padding-top:8px;">Conference attendance at regional MTN summit – networking and training sessions.</textarea>
+        </div>
+        <div class="form-note">
+          <strong>⚠ Control:</strong> You cannot submit a new mission if you have an active open mission. If this is a long-term mission, it will be processed as monthly separate cycles.
+        </div>
+        <div class="form-group form-full">
+          <div class="calc-preview">
+            <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Auto-Calculated Estimate</div>
+            <div class="calc-row"><span>Per Diem (5 days × SDG 9,000)</span><span style="font-weight:600;">SDG 45,000</span></div>
+            <div class="calc-row"><span>Accommodation (4 nights × SDG 25,000)</span><span style="font-weight:600;">SDG 100,000</span></div>
+            <div class="calc-row"><span>Transport (estimated)</span><span style="color:#9CA3AF;">To be entered by Travel Team</span></div>
+            <div class="calc-row total"><span>Estimated Total</span><span style="color:var(--mtn-success);">SDG 145,000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HiFi Approvals Screen -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 4.3 — Pending Approvals (Line Manager / Division Manager)</div>
+    <div style="background:#fff;border-radius:var(--radius);border:1px solid #EBEBEB;padding:20px;max-width:800px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:700;">Pending Approvals</div>
+        <span class="tag tag-pending">5 requests</span>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <button class="btn-reject" style="font-size:11px;padding:6px 14px;"><i class="ti ti-filter"></i>Filter</button>
+        </div>
+      </div>
+      <div class="approval-card">
+        <div class="approval-head">
+          <div class="hifi-avatar" style="width:36px;height:36px;font-size:12px;">SM</div>
+          <div class="approval-info">
+            <div class="approval-name">Sara Mohamed</div>
+            <div class="approval-meta">TRV-2025-0146 · Submitted 2 hours ago</div>
+          </div>
+          <span class="status-pill sp-pending-lm">Awaiting Line Manager</span>
+        </div>
+        <div class="approval-body">
+          <div class="approval-field"><label>Destination</label><span>Dubai, UAE</span></div>
+          <div class="approval-field"><label>Type</label><span>International</span></div>
+          <div class="approval-field"><label>Duration</label><span>5 days</span></div>
+          <div class="approval-field"><label>Purpose</label><span>Conference</span></div>
+          <div class="approval-field"><label>Start Date</label><span>Jun 10, 2025</span></div>
+          <div class="approval-field"><label>End Date</label><span>Jun 14, 2025</span></div>
+          <div class="approval-field"><label>Est. Per Diem</label><span>USD 500</span></div>
+          <div class="approval-field"><label>Est. Accommodation</label><span>USD 600</span></div>
+        </div>
+        <div class="approval-footer">
+          <button class="btn-reject"><i class="ti ti-x"></i>Reject</button>
+          <button class="btn-approve"><i class="ti ti-check"></i>Approve</button>
+        </div>
+      </div>
+      <div class="approval-card" style="opacity:0.7;">
+        <div class="approval-head">
+          <div class="hifi-avatar" style="width:36px;height:36px;font-size:12px;background:#E0F2FE;color:#0369A1;">OA</div>
+          <div class="approval-info">
+            <div class="approval-name">Omar Abdullah</div>
+            <div class="approval-meta">TRV-2025-0143 · Submitted 1 day ago</div>
+          </div>
+          <span class="status-pill sp-pending-lm">Awaiting Line Manager</span>
+        </div>
+        <div class="approval-body">
+          <div class="approval-field"><label>Destination</label><span>Khartoum</span></div>
+          <div class="approval-field"><label>Type</label><span>National</span></div>
+          <div class="approval-field"><label>Duration</label><span>30 days</span></div>
+          <div class="approval-field"><label>Purpose</label><span>Job Mission</span></div>
+          <div class="approval-field"><label>Start Date</label><span>Jun 1, 2025</span></div>
+          <div class="approval-field"><label>End Date</label><span>Jun 30, 2025</span></div>
+          <div class="approval-field"><label>Est. Per Diem</label><span>SDG 270,000</span></div>
+          <div class="approval-field"><label>Est. Accommodation</label><span>SDG 2,700,000</span></div>
+        </div>
+        <div class="approval-footer">
+          <button class="btn-reject"><i class="ti ti-x"></i>Reject</button>
+          <button class="btn-approve"><i class="ti ti-check"></i>Approve</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HiFi Mission Details with Workflow Tracker -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 4.4 — Mission Details with Workflow Progress</div>
+    <div style="background:#fff;border-radius:var(--radius);border:1px solid #EBEBEB;max-width:800px;overflow:hidden;">
+      <div style="padding:16px 20px;border-bottom:1px solid #EBEBEB;display:flex;align-items:center;gap:12px;">
+        <button class="btn-reject" style="font-size:11px;padding:6px 12px;"><i class="ti ti-arrow-left"></i></button>
+        <div>
+          <div style="font-size:15px;font-weight:700;">TRV-2025-0146</div>
+          <div style="font-size:11px;color:var(--mtn-text-muted);">Sara Mohamed · IT Division</div>
+        </div>
+        <span class="status-pill sp-pending-travel" style="margin-left:auto;">Pending Travel Review</span>
+      </div>
+      <!-- Workflow Steps -->
+      <div style="padding:16px 20px;border-bottom:1px solid #EBEBEB;background:#FAFAFA;">
+        <div style="font-size:11px;font-weight:600;color:#9CA3AF;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Mission Progress</div>
+        <div class="workflow-track">
+          <div class="wf-step done">
+            <div class="wf-step-icon"><i class="ti ti-file-plus"></i></div>
+            <div class="wf-step-lbl">Created</div>
+          </div>
+          <div class="wf-step done">
+            <div class="wf-step-icon"><i class="ti ti-user-check"></i></div>
+            <div class="wf-step-lbl">Line Mgr</div>
+          </div>
+          <div class="wf-step done">
+            <div class="wf-step-icon"><i class="ti ti-building"></i></div>
+            <div class="wf-step-lbl">Div. Mgr</div>
+          </div>
+          <div class="wf-step active">
+            <div class="wf-step-icon"><i class="ti ti-plane"></i></div>
+            <div class="wf-step-lbl">Travel Review</div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-step-icon"><i class="ti ti-cash"></i></div>
+            <div class="wf-step-lbl">Payment</div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-step-icon"><i class="ti ti-rocket"></i></div>
+            <div class="wf-step-lbl">Active</div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-step-icon"><i class="ti ti-flag-3"></i></div>
+            <div class="wf-step-lbl">Closed</div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-step-icon"><i class="ti ti-check-all"></i></div>
+            <div class="wf-step-lbl">Settled</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+        <div style="padding:16px 20px;border-right:1px solid #F3F4F6;">
+          <div style="font-size:11px;font-weight:600;color:#9CA3AF;margin-bottom:10px;text-transform:uppercase;">Mission Information</div>
+          <table style="width:100%;font-size:12.5px;border-collapse:collapse;">
+            <tr><td style="color:#6B7280;padding:5px 0;width:120px;">Employee</td><td style="font-weight:500;">Sara Mohamed</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Department</td><td>IT Division</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Mission Type</td><td><span class="tag tag-info">International</span></td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Purpose</td><td>Conference</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Destination</td><td>Dubai, UAE</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Start Date</td><td>Jun 10, 2025</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">End Date</td><td>Jun 14, 2025</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Days</td><td>5 days (4 nights)</td></tr>
+          </table>
+        </div>
+        <div style="padding:16px 20px;">
+          <div style="font-size:11px;font-weight:600;color:#9CA3AF;margin-bottom:10px;text-transform:uppercase;">Cost Breakdown (USD)</div>
+          <table style="width:100%;font-size:12.5px;border-collapse:collapse;">
+            <tr><td style="color:#6B7280;padding:5px 0;">Per Diem (5 days)</td><td style="text-align:right;font-weight:500;">$500.00</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Accommodation (4 nights)</td><td style="text-align:right;font-weight:500;">$600.00</td></tr>
+            <tr><td style="color:#6B7280;padding:5px 0;">Transport / Ticket</td><td style="text-align:right;color:#9CA3AF;">Pending entry</td></tr>
+            <tr style="border-top:1px solid #E5E7EB;"><td style="padding:8px 0;font-weight:700;">Total Advance</td><td style="text-align:right;font-weight:700;color:var(--mtn-success);">$1,100.00</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HiFi Settlement Screen -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 4.5 — Settlement Screen (Finance)</div>
+    <div style="background:#fff;border-radius:var(--radius);border:1px solid #EBEBEB;padding:20px;max-width:800px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <i class="ti ti-scale" style="font-size:20px;color:var(--mtn-yellow-dark);"></i>
+        <div>
+          <div style="font-size:15px;font-weight:700;">Mission Settlement</div>
+          <div style="font-size:11px;color:var(--mtn-text-muted);">TRV-2025-0144 · Hind Khalid</div>
+        </div>
+        <span class="status-pill sp-pending-settle" style="margin-left:auto;">Pending Settlement</span>
+      </div>
+      <div class="settle-grid">
+        <div>
+          <div style="font-size:11px;font-weight:600;color:#9CA3AF;margin-bottom:8px;text-transform:uppercase;">Checklist (Ms. Huda)</div>
+          <div style="border:1px solid #EBEBEB;border-radius:var(--radius-sm);overflow:hidden;">
+            <table class="settle-table" style="width:100%;">
+              <thead><tr><th>Item</th><th>Advance</th><th>Actual</th><th>Diff</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Per Diem (5 days)</td>
+                  <td>SDG 45,000</td>
+                  <td style="color:var(--mtn-success);">SDG 45,000</td>
+                  <td><span class="tag tag-success" style="font-size:10px;">0</span></td>
+                </tr>
+                <tr>
+                  <td>Accommodation (4 nights)</td>
+                  <td>SDG 100,000</td>
+                  <td style="color:var(--mtn-warning);">SDG 88,000</td>
+                  <td><span class="tag tag-success" style="font-size:10px;">−12,000</span></td>
+                </tr>
+                <tr>
+                  <td>Transport</td>
+                  <td>SDG 15,000</td>
+                  <td>SDG 15,000</td>
+                  <td><span class="tag tag-success" style="font-size:10px;">0</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;">
+            <div style="flex:1;font-size:12px;"><span style="color:#6B7280;">Total Advance:</span> <strong>SDG 160,000</strong></div>
+            <div style="flex:1;font-size:12px;"><span style="color:#6B7280;">Total Actual:</span> <strong>SDG 148,000</strong></div>
+          </div>
+        </div>
+        <div>
+          <div class="balance-card">
+            <div style="font-size:11px;font-weight:600;color:#9CA3AF;margin-bottom:8px;text-transform:uppercase;">Settlement Balance</div>
+            <div class="balance-positive">SDG 12,000 Credit</div>
+            <div style="font-size:11px;color:var(--mtn-text-muted);margin-bottom:12px;">Employee owes back SDG 12,000 to the company.</div>
+            <div style="margin-bottom:10px;">
+              <div style="font-size:11px;font-weight:600;margin-bottom:4px;">Settlement Action</div>
+              <select class="form-control form-select" style="font-size:12px;height:32px;">
+                <option>Mark as Cleared</option>
+                <option>Deduct from salary</option>
+                <option>Pending repayment</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-approve" style="flex:1;justify-content:center;"><i class="ti ti-check"></i>Clear Settlement</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- SECTION 5: FIGMA COMPONENT STRUCTURE -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="s5" class="section">
+  <div class="section-header">
+    <div class="section-label">Section 05</div>
+    <div class="section-title">Figma Component Structure</div>
+    <div class="section-desc">Recommended Figma file organization, component hierarchy, and auto-layout specifications.</div>
+  </div>
+
+  <div class="three-col">
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">🗂 Page Structure</div>
+      <div style="background:#f8f9fa;border-radius:var(--radius);padding:14px;font-size:12px;">
+        <div style="font-weight:700;margin-bottom:8px;font-family:monospace;color:var(--mtn-info);">📁 MTN-Travel-System.fig</div>
+        <div style="padding-left:16px;line-height:2;">
+          <div>📄 <strong>00_Cover</strong></div>
+          <div>📄 <strong>01_Design_System</strong></div>
+          <div>📄 <strong>02_Information_Architecture</strong></div>
+          <div>📄 <strong>03_User_Flows</strong></div>
+          <div>📄 <strong>04_Wireframes</strong></div>
+          <div>📄 <strong>05_Dashboard</strong></div>
+          <div>📄 <strong>06_Mission_Mgmt</strong></div>
+          <div>📄 <strong>07_Approvals</strong></div>
+          <div>📄 <strong>08_Travel_Review</strong></div>
+          <div>📄 <strong>09_Treasury</strong></div>
+          <div>📄 <strong>10_Closure_Extension</strong></div>
+          <div>📄 <strong>11_Settlement</strong></div>
+          <div>📄 <strong>12_Reports</strong></div>
+          <div>📄 <strong>13_Prototype_Flows</strong></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">🧩 Component Library</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="figma-component">
+          <div class="figma-component-name">Navigation/Sidebar</div>
+          <div class="figma-component-type">Instance swap</div>
+          <div class="figma-component-props">Props: role={assigned|manager|travel|treasury|finance|hr}, activeItem={string}</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">MissionCard</div>
+          <div class="figma-component-type">Variant set</div>
+          <div class="figma-component-props">Variants: status={all 11 statuses}, type={national|international}</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">StatusPill</div>
+          <div class="figma-component-type">Variant set</div>
+          <div class="figma-component-props">11 variants covering all mission statuses</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">WorkflowTracker</div>
+          <div class="figma-component-type">Auto-layout</div>
+          <div class="figma-component-props">Props: currentStep={0–7}, steps=[array]</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">ApprovalCard</div>
+          <div class="figma-component-type">Frame</div>
+          <div class="figma-component-props">Props: missionData, approvalLevel, showActions</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">CostBreakdown</div>
+          <div class="figma-component-type">Auto-layout</div>
+          <div class="figma-component-props">Props: currency={SDG|USD|EUR}, perDiem, accommodation, transport</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">⚙️ Auto-Layout Specs</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="figma-component">
+          <div class="figma-component-name">Page Layout</div>
+          <div class="figma-component-props">Sidebar: 240px fixed · Topbar: 64px fixed · Content: fill, padding 24px all sides · Gap: 20px vertical between sections</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">KPI Grid</div>
+          <div class="figma-component-props">Direction: horizontal · Wrap: auto · Gap: 14px · Min card width: 160px</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">Data Table Row</div>
+          <div class="figma-component-props">Direction: horizontal · Align: center vertical · Height: 48px · Padding: 0 16px · Border-bottom: 1px #F9FAFB</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">Form Grid</div>
+          <div class="figma-component-props">Columns: 2 · Gap: 14px · Full-width fields: span 2 · Input height: 36px</div>
+        </div>
+        <div class="figma-component">
+          <div class="figma-component-name">Workflow Steps</div>
+          <div class="figma-component-props">Direction: horizontal · Distribute: space-between · Step width: 80px min · Connector: 2px line between steps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- SECTION 6: DESIGN SYSTEM -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="s6" class="section">
+  <div class="section-header">
+    <div class="section-label">Section 06</div>
+    <div class="section-title">Design System Recommendations</div>
+    <div class="section-desc">Color tokens, typography, spacing scale, component states, and accessibility guidelines.</div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <!-- Colors -->
+      <div class="ds-section">
+        <div class="ds-label">Brand Colors</div>
+        <div class="color-swatches">
+          <div class="swatch"><div class="swatch-color" style="background:#FFCB00;"></div><div class="swatch-name">MTN Yellow</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#1A1A1A;"></div><div class="swatch-name">MTN Black</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#FFF8D6;"></div><div class="swatch-name">Yellow Light</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#E6B800;"></div><div class="swatch-name">Yellow Dark</div></div>
+        </div>
+      </div>
+
+      <div class="ds-section">
+        <div class="ds-label">Semantic Colors</div>
+        <div class="color-swatches">
+          <div class="swatch"><div class="swatch-color" style="background:#16A34A;"></div><div class="swatch-name">Success</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#D97706;"></div><div class="swatch-name">Warning</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#DC2626;"></div><div class="swatch-name">Danger</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#2563EB;"></div><div class="swatch-name">Info</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#7C3AED;"></div><div class="swatch-name">Pending</div></div>
+        </div>
+      </div>
+
+      <div class="ds-section">
+        <div class="ds-label">Typography Scale</div>
+        <div class="type-specimen" style="border-color:#FFCB00;">
+          <div style="font-family:'Space Grotesk';font-size:22px;font-weight:700;">Page Title · 22px / 700</div>
+          <div style="font-size:11px;color:#9CA3AF;">Space Grotesk Bold</div>
+        </div>
+        <div class="type-specimen">
+          <div style="font-size:17px;font-weight:600;">Section Heading · 17px / 600</div>
+          <div style="font-size:11px;color:#9CA3AF;">Inter SemiBold</div>
+        </div>
+        <div class="type-specimen">
+          <div style="font-size:14px;font-weight:500;">Card Title · 14px / 500</div>
+          <div style="font-size:11px;color:#9CA3AF;">Inter Medium</div>
+        </div>
+        <div class="type-specimen">
+          <div style="font-size:12.5px;font-weight:400;color:#374151;">Body Text · 12.5px / 400</div>
+          <div style="font-size:11px;color:#9CA3AF;">Inter Regular</div>
+        </div>
+        <div class="type-specimen">
+          <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;">Label · 10px / 600 Uppercase</div>
+          <div style="font-size:11px;color:#9CA3AF;">Inter SemiBold</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Spacing -->
+      <div class="ds-section">
+        <div class="ds-label">Spacing Scale</div>
+        <div class="spacing-scale">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:4px;height:4px;"></div><div style="font-size:10px;color:#9CA3AF;">4</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:8px;height:8px;"></div><div style="font-size:10px;color:#9CA3AF;">8</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:12px;height:12px;"></div><div style="font-size:10px;color:#9CA3AF;">12</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:16px;height:16px;"></div><div style="font-size:10px;color:#9CA3AF;">16</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:20px;height:20px;"></div><div style="font-size:10px;color:#9CA3AF;">20</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:24px;height:24px;"></div><div style="font-size:10px;color:#9CA3AF;">24</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:32px;height:32px;"></div><div style="font-size:10px;color:#9CA3AF;">32</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div class="spacing-box" style="width:48px;height:48px;"></div><div style="font-size:10px;color:#9CA3AF;">48</div></div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="ds-section">
+        <div class="ds-label">Button System</div>
+        <div class="component-row">
+          <button class="btn-primary">Primary Action</button>
+          <button class="btn-approve">Approve</button>
+          <button class="btn-reject">Reject</button>
+          <button style="background:#F3F4F6;border:none;border-radius:6px;padding:8px 16px;font-size:12px;font-weight:500;cursor:pointer;">Ghost</button>
+        </div>
+        <div style="font-size:11px;color:#9CA3AF;padding:0 16px;">Primary: MTN Yellow / Approve: Green #16A34A / Reject: outlined red / Ghost: gray fill</div>
+      </div>
+
+      <!-- Status Pills -->
+      <div class="ds-section">
+        <div class="ds-label">Status Pill System</div>
+        <div class="component-row" style="flex-wrap:wrap;">
+          <span class="status-pill sp-draft">Draft</span>
+          <span class="status-pill sp-pending-lm">Pending Line Mgr</span>
+          <span class="status-pill sp-pending-dm">Pending Div. Mgr</span>
+          <span class="status-pill sp-pending-travel">Pending Travel</span>
+          <span class="status-pill sp-pending-payment">Pending Payment</span>
+          <span class="status-pill sp-active">Active</span>
+          <span class="status-pill sp-extended">Extended</span>
+          <span class="status-pill sp-closed">Closed</span>
+          <span class="status-pill sp-pending-settle">Pending Settle</span>
+          <span class="status-pill sp-completed">Completed</span>
+          <span class="status-pill sp-rejected">Rejected</span>
+        </div>
+      </div>
+
+      <!-- Icons -->
+      <div class="ds-section">
+        <div class="ds-label">Icon Set (Tabler Icons)</div>
+        <div class="icon-grid">
+          <div class="icon-item"><i class="ti ti-briefcase"></i><span>missions</span></div>
+          <div class="icon-item"><i class="ti ti-check"></i><span>approve</span></div>
+          <div class="icon-item"><i class="ti ti-x"></i><span>reject</span></div>
+          <div class="icon-item"><i class="ti ti-plane"></i><span>travel</span></div>
+          <div class="icon-item"><i class="ti ti-building-bank"></i><span>treasury</span></div>
+          <div class="icon-item"><i class="ti ti-scale"></i><span>settle</span></div>
+          <div class="icon-item"><i class="ti ti-flag-3"></i><span>close</span></div>
+          <div class="icon-item"><i class="ti ti-report"></i><span>report</span></div>
+          <div class="icon-item"><i class="ti ti-calendar-plus"></i><span>extend</span></div>
+          <div class="icon-item"><i class="ti ti-history"></i><span>history</span></div>
+          <div class="icon-item"><i class="ti ti-upload"></i><span>upload</span></div>
+          <div class="icon-item"><i class="ti ti-bell"></i><span>notify</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accessibility Notes -->
+  <div style="margin-top:1.5rem;">
+    <div class="ds-label" style="margin-bottom:10px;">Accessibility Guidelines</div>
+    <div class="three-col">
+      <div class="card-sm" style="border-top:3px solid var(--mtn-yellow);">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;">Contrast Ratios</div>
+        <div style="font-size:12px;color:var(--mtn-text-muted);">MTN Yellow on Black: 12.6:1 ✓<br>White on sidebar #0F0F0F: 19.6:1 ✓<br>Dark text on Yellow: 8.7:1 ✓<br>All meet WCAG AA minimum (4.5:1)</div>
+      </div>
+      <div class="card-sm" style="border-top:3px solid var(--mtn-info);">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;">Interactive States</div>
+        <div style="font-size:12px;color:var(--mtn-text-muted);">Focus rings: 3px yellow outline<br>Hover: 5% background darkening<br>Disabled: 40% opacity<br>Error: Red border + helper text<br>Loading: Skeleton shimmer animation</div>
+      </div>
+      <div class="card-sm" style="border-top:3px solid var(--mtn-success);">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;">RTL/Arabic Support</div>
+        <div style="font-size:12px;color:var(--mtn-text-muted);">System must support Arabic (RTL).<br>Use logical CSS properties: margin-inline, padding-inline, border-inline.<br>Sidebar direction reverses.<br>Text: Cairo or Tajawal fonts for Arabic.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- SECTION 7: FIGMA-READY LAYOUTS -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="s7" class="section">
+  <div class="section-header">
+    <div class="section-label">Section 07</div>
+    <div class="section-title">Figma-Ready Screen Layouts</div>
+    <div class="section-desc">Complete annotated specifications for Travel Cost Review, Treasury Payment, Mission Closure, and Reports screens.</div>
+  </div>
+
+  <!-- Travel Cost Review -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 7.1 — Travel Cost Review (Travel Team)</div>
+    <div style="background:#fff;border-radius:var(--radius);border:1px solid #EBEBEB;max-width:800px;overflow:hidden;">
+      <div style="padding:16px 20px;border-bottom:1px solid #EBEBEB;display:flex;align-items:center;gap:12px;">
+        <i class="ti ti-plane" style="font-size:18px;color:var(--mtn-yellow-dark);"></i>
+        <div>
+          <div style="font-size:15px;font-weight:700;">Travel Cost Review</div>
+          <div style="font-size:11px;color:var(--mtn-text-muted);">TRV-2025-0146 · Sara Mohamed · Dubai, UAE</div>
+        </div>
+        <span class="status-pill sp-pending-travel" style="margin-left:auto;">Awaiting Your Review</span>
+      </div>
+      <div style="padding:20px;">
+        <div style="font-size:11px;font-weight:600;color:#9CA3AF;margin-bottom:12px;text-transform:uppercase;">Enter Travel Costs (International · USD)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div class="form-group">
+            <label>Per Diem Rate (per day)</label>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <input class="form-control" value="100" style="width:100px;">
+              <span style="font-size:12px;color:#6B7280;">USD × 5 days = <strong>$500</strong></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Accommodation (per night)</label>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <input class="form-control" value="150" style="width:100px;">
+              <span style="font-size:12px;color:#6B7280;">USD × 4 nights = <strong>$600</strong></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Flight / Transport</label>
+            <input class="form-control" placeholder="Enter amount (USD)" value="850">
+          </div>
+          <div class="form-group">
+            <label>Travel Dates Confirmed</label>
+            <div style="display:flex;gap:8px;">
+              <input class="form-control" type="date" value="2025-06-10" style="flex:1;">
+              <input class="form-control" type="date" value="2025-06-14" style="flex:1;">
+            </div>
+          </div>
+        </div>
+        <div style="background:#F9FAFB;border-radius:var(--radius-sm);border:1px solid #E5E7EB;padding:14px;margin-bottom:14px;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Total Approved Amount</div>
+          <div style="display:flex;gap:20px;font-size:13px;">
+            <div><span style="color:#6B7280;">Per Diem:</span> <strong>$500</strong></div>
+            <div><span style="color:#6B7280;">Accommodation:</span> <strong>$600</strong></div>
+            <div><span style="color:#6B7280;">Transport:</span> <strong>$850</strong></div>
+            <div style="margin-left:auto;font-size:15px;font-weight:700;color:var(--mtn-success);">Total: $1,950</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:10px;">
+          <button class="btn-reject"><i class="ti ti-x"></i>Return to Requester</button>
+          <button class="btn-primary"><i class="ti ti-send"></i>Submit to Finance GL →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reports Screen -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Screen 7.2 — Employee Mission History Report (Finance)</div>
+    <div style="background:#fff;border-radius:var(--radius);border:1px solid #EBEBEB;max-width:800px;overflow:hidden;">
+      <div style="padding:16px 20px;border-bottom:1px solid #EBEBEB;display:flex;align-items:center;gap:12px;">
+        <i class="ti ti-history" style="font-size:18px;color:var(--mtn-yellow-dark);"></i>
+        <div style="font-size:15px;font-weight:700;">Employee Mission History</div>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <select class="form-control form-select" style="height:32px;font-size:12px;width:160px;"><option>All Employees</option><option selected>Sara Mohamed</option></select>
+          <select class="form-control form-select" style="height:32px;font-size:12px;width:120px;"><option>2025</option><option>2024</option></select>
+          <button class="btn-primary" style="padding:0 14px;height:32px;font-size:12px;"><i class="ti ti-download"></i>Export</button>
+        </div>
+      </div>
+      <div style="padding:16px 20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div style="background:#F9FAFB;border-radius:var(--radius-sm);padding:10px 12px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;">Total Missions</div>
+            <div style="font-size:20px;font-weight:700;font-family:'Space Grotesk';">8</div>
+          </div>
+          <div style="background:#F9FAFB;border-radius:var(--radius-sm);padding:10px 12px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;">Total Paid</div>
+            <div style="font-size:20px;font-weight:700;font-family:'Space Grotesk';color:var(--mtn-danger);">$8,400</div>
+          </div>
+          <div style="background:#F9FAFB;border-radius:var(--radius-sm);padding:10px 12px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;">Total Settled</div>
+            <div style="font-size:20px;font-weight:700;font-family:'Space Grotesk';color:var(--mtn-success);">$7,200</div>
+          </div>
+          <div style="background:#FEF3C7;border-radius:var(--radius-sm);padding:10px 12px;">
+            <div style="font-size:10px;color:#92400E;text-transform:uppercase;letter-spacing:0.5px;">Outstanding</div>
+            <div style="font-size:20px;font-weight:700;font-family:'Space Grotesk';color:var(--mtn-warning);">$1,200</div>
+          </div>
+        </div>
+        <div class="hifi-table">
+          <div class="hifi-th" style="grid-template-columns:1fr 1fr 0.8fr 0.8fr 0.8fr;"><span>Mission</span><span>Destination</span><span>Period</span><span>Amount</span><span>Status</span></div>
+          <div class="hifi-tr" style="grid-template-columns:1fr 1fr 0.8fr 0.8fr 0.8fr;">
+            <div><div class="mission-id">TRV-2025-0146</div><div style="font-size:11px;color:#6B7280;">Conference</div></div>
+            <div>Dubai, UAE</div>
+            <div style="font-size:11px;">Jun 10–14</div>
+            <div>$1,950</div>
+            <div><span class="status-pill sp-active">Active</span></div>
+          </div>
+          <div class="hifi-tr" style="grid-template-columns:1fr 1fr 0.8fr 0.8fr 0.8fr;">
+            <div><div class="mission-id">TRV-2025-0122</div><div style="font-size:11px;color:#6B7280;">Training</div></div>
+            <div>South Africa</div>
+            <div style="font-size:11px;">Mar 5–12</div>
+            <div>$2,100</div>
+            <div><span class="status-pill sp-completed">Completed</span></div>
+          </div>
+          <div class="hifi-tr" style="grid-template-columns:1fr 1fr 0.8fr 0.8fr 0.8fr;">
+            <div><div class="mission-id">TRV-2025-0098</div><div style="font-size:11px;color:#6B7280;">Job Mission</div></div>
+            <div>Cairo, Egypt</div>
+            <div style="font-size:11px;">Jan 20–25</div>
+            <div>$1,400</div>
+            <div><span class="status-pill sp-completed">Completed</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spec Summary Table -->
+  <div>
+    <div class="section-label" style="margin-bottom:12px;">Complete Screen Inventory & Specs</div>
+    <div style="background:#fff;border-radius:var(--radius);border:1px solid #EBEBEB;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+        <thead>
+          <tr style="background:#FAFAFA;border-bottom:1px solid #EBEBEB;">
+            <th style="padding:10px 16px;text-align:left;font-size:11px;color:#9CA3AF;font-weight:600;text-transform:uppercase;">Screen</th>
+            <th style="padding:10px 16px;text-align:left;font-size:11px;color:#9CA3AF;font-weight:600;text-transform:uppercase;">Primary Users</th>
+            <th style="padding:10px 16px;text-align:left;font-size:11px;color:#9CA3AF;font-weight:600;text-transform:uppercase;">Key Actions</th>
+            <th style="padding:10px 16px;text-align:left;font-size:11px;color:#9CA3AF;font-weight:600;text-transform:uppercase;">Triggers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Dashboard</td><td style="padding:10px 16px;"><span class="tag tag-gray">All</span></td><td style="padding:10px 16px;color:#6B7280;">View KPIs, recent missions, pending actions</td><td style="padding:10px 16px;color:#6B7280;">Login / home</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Create Mission</td><td style="padding:10px 16px;"><span class="tag tag-info">Person</span></td><td style="padding:10px 16px;color:#6B7280;">3-step form: info, travel details, review</td><td style="padding:10px 16px;color:#6B7280;">New Mission button</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Mission List</td><td style="padding:10px 16px;"><span class="tag tag-info">Person</span></td><td style="padding:10px 16px;color:#6B7280;">Search, filter by status, view details</td><td style="padding:10px 16px;color:#6B7280;">Sidebar nav</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Mission Details</td><td style="padding:10px 16px;"><span class="tag tag-gray">All</span></td><td style="padding:10px 16px;color:#6B7280;">View workflow, cost breakdown, documents</td><td style="padding:10px 16px;color:#6B7280;">Click any mission row</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Pending Approvals</td><td style="padding:10px 16px;"><span class="tag tag-warning">LM / DM</span></td><td style="padding:10px 16px;color:#6B7280;">Approve or reject with optional note</td><td style="padding:10px 16px;color:#6B7280;">Notification / sidebar</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Travel Cost Review</td><td style="padding:10px 16px;"><span class="tag tag-pending">Travel</span></td><td style="padding:10px 16px;color:#6B7280;">Enter per diem, accommodation, transport</td><td style="padding:10px 16px;color:#6B7280;">After Div. Mgr approval</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Payments</td><td style="padding:10px 16px;"><span class="tag tag-success">Treasury</span></td><td style="padding:10px 16px;color:#6B7280;">Review approved amount, confirm payment</td><td style="padding:10px 16px;color:#6B7280;">After Travel review</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Mission Closure</td><td style="padding:10px 16px;"><span class="tag tag-info">Person</span></td><td style="padding:10px 16px;color:#6B7280;">Close mission, upload invoices/receipts</td><td style="padding:10px 16px;color:#6B7280;">Mission end date reached</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Mission Extensions</td><td style="padding:10px 16px;"><span class="tag tag-info">Person</span></td><td style="padding:10px 16px;color:#6B7280;">Request additional days, re-triggers approval</td><td style="padding:10px 16px;color:#6B7280;">Active mission screen</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Settlements</td><td style="padding:10px 16px;"><span class="tag tag-success">Finance</span></td><td style="padding:10px 16px;color:#6B7280;">Compare advance vs actual, clear or debit</td><td style="padding:10px 16px;color:#6B7280;">After travel approval on closure</td></tr>
+          <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 16px;font-weight:600;">Mission History</td><td style="padding:10px 16px;"><span class="tag tag-success">Finance</span></td><td style="padding:10px 16px;color:#6B7280;">Filter by employee, year; export CSV</td><td style="padding:10px 16px;color:#6B7280;">Reports menu</td></tr>
+          <tr><td style="padding:10px 16px;font-weight:600;">Debit/Credit Report</td><td style="padding:10px 16px;"><span class="tag tag-success">Finance</span></td><td style="padding:10px 16px;color:#6B7280;">View balances, outstanding debts per employee</td><td style="padding:10px 16px;color:#6B7280;">Reports menu</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div style="background:var(--mtn-black);color:rgba(255,255,255,0.5);text-align:center;padding:24px;font-size:12px;">
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px;">
+    <div style="background:var(--mtn-yellow);color:#000;font-weight:800;font-size:12px;padding:4px 12px;border-radius:40px;letter-spacing:1px;">MTN</div>
+    <span style="color:rgba(255,255,255,0.7);">Travel Mission Management System · Complete UI/UX Design Specification</span>
+  </div>
+  <div>Based on: Travel_System_Requirements.docx (source of truth) · Process_Flow.png · Meeting Transcript (context only)</div>
+  <div style="margin-top:4px;">Design follows MTN brand guidelines · 7 sections · 12 screen designs · Full design system</div>
+</div>
+
+</body>
+</html>

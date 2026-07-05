@@ -1,0 +1,375 @@
+**EPIC 1 – Dashboard**
+
+**Features**
+
+- Dashboard KPIs
+
+- Pending Approvals Widget
+
+- Pending Payments Widget
+
+- Quick Actions
+
+**User Stories**
+
+- View Dashboard KPIs
+
+- View Pending Approvals
+
+- View Pending Payments
+
+- Navigate from Dashboard to Details
+
+- View Open Missions Count
+
+- View Active Missions Count
+
+- View Pending Settlement Count
+
+**EPIC 2 – Mission Management**
+
+**Feature: Mission List**
+
+**User Stories**
+
+- View Mission List
+
+- Search Missions
+
+- Filter by Status
+
+- Filter by Mission Type
+
+- Filter by Employee
+
+- Filter by Date Range
+
+- Sort Missions
+
+- Export Mission List
+
+**Feature: Mission Details**
+
+**User Stories**
+
+- View Mission Details
+
+- View Cost Breakdown
+
+- View Approval History
+
+- View Settlement History
+
+- View Attachments
+
+**Feature: My Missions**
+
+**User Stories**
+
+- View My Missions
+
+- Track Mission Status
+
+- Search My Missions
+
+- Filter My Missions
+
+**EPIC 3 – Mission Creation**
+
+**Feature: Create Mission**
+
+**User Stories**
+
+- Create New Mission
+
+- Select Mission Type
+
+- Select Mission Category
+
+- Select Destination
+
+- Select Start Date
+
+- Select End Date
+
+- Enter Mission Purpose
+
+- Upload Supporting Documents
+
+- Save Draft
+
+- Submit Mission
+
+**Feature: Validation**
+
+**User Stories**
+
+- Validate Mandatory Fields
+
+- Prevent Invalid Dates
+
+- Validate Attachments
+
+- Display Validation Messages
+
+**EPIC 4 – Approval Workflow**
+
+**Feature: Line Manager Approval**
+
+**User Stories**
+
+- View Pending LM Requests
+
+- Approve Request
+
+- Reject Request
+
+- Add Approval Notes
+
+- View Mission Details Before Approval
+
+**Feature: Division Manager Approval**
+
+**User Stories**
+
+- View Pending DM Requests
+
+- Approve Request
+
+- Reject Request
+
+- Add Notes
+
+**EPIC 5 – Travel Review**
+
+**Feature: Travel Cost Review**
+
+**User Stories**
+
+- View Pending Travel Reviews
+
+- Enter Per Diem
+
+- Enter Accommodation Cost
+
+- Enter Other Expenses
+
+- Modify Cost Values
+
+- Reject Request
+
+- Submit To GL
+
+**Feature: Travel Cost Validation**
+
+**User Stories**
+
+- Calculate Mission Total
+
+- Recalculate Cost After Modification
+
+- Display Cost Summary
+
+**EPIC 6 – GL Review**
+
+**Feature: Financial Validation**
+
+**User Stories**
+
+- View Pending GL Requests
+
+- Review Costs
+
+- Modify Financial Values
+
+- Reject Request
+
+- Submit To Treasury
+
+**Feature: GL Audit**
+
+**User Stories**
+
+- View Travel Calculations
+
+- View Financial Summary
+
+- Record GL Notes
+
+**EPIC 7 – Treasury**
+
+**Feature: Payment Processing**
+
+**User Stories**
+
+- View Pending Payments
+
+- Enter Payment Reference
+
+- Enter Payment Date
+
+- Add Treasury Notes
+
+- Confirm Payment
+
+- Mark Mission Active
+
+**Feature: Treasury Tracking**
+
+**User Stories**
+
+- View Payment History
+
+- Search Payments
+
+- Filter Payments
+
+**EPIC 8 – Mission Extension**
+
+**Feature: Extension Request**
+
+**User Stories**
+
+- Request Mission Extension
+
+- Enter New End Date
+
+- Enter Extension Reason
+
+- Submit Extension Request
+
+**Feature: Extension Tracking**
+
+**User Stories**
+
+- View Extension History
+
+- View Extension Status
+
+- View Approval History
+
+**EPIC 9 – Mission Closure**
+
+**Feature: Mission Closure**
+
+**User Stories**
+
+- Close Mission
+
+- Upload Closure Documents
+
+- Submit Closure
+
+**Feature: Closure Tracking**
+
+**User Stories**
+
+- View Uploaded Documents
+
+- View Closure Status
+
+**EPIC 10 – Settlement**
+
+**Feature: Settlement Processing**
+
+**User Stories**
+
+- View Pending Settlements
+
+- Enter Actual Costs
+
+- Compare Planned vs Actual
+
+- Calculate Balance
+
+- Add Settlement Reference
+
+- Process Settlement
+
+**Feature: Debit/Credit Management**
+
+**User Stories**
+
+- Identify Employee Debit
+
+- Identify Employee Credit
+
+- Display Settlement Result
+
+**EPIC 11 – Reporting**
+
+**Feature: ****Employee Mission**** History**
+
+**User Stories**
+
+- View Employee History
+
+- Search Employee History
+
+- Filter Employee History
+
+- Export Employee History
+
+**Feature: Debit/Credit Report**
+
+**User Stories**
+
+- View Debit Report
+
+- View Credit Report
+
+- Search Report
+
+- Filter Report
+
+- Export Report
+
+**EPIC 12 – Notifications**
+
+**Feature: Workflow Notifications**
+
+**User Stories**
+
+- Notify LM
+
+- Notify DM
+
+- Notify Travel Team
+
+- Notify GL Team
+
+- Notify Treasury
+
+- Notify Employee After Payment
+
+- Notify Employee On Rejection
+
+**EPIC 13 – Security ****&**** Roles**
+
+**Feature: Role Management**
+
+**User Stories**
+
+- Assigned Person Access
+
+- Line Manager Access
+
+- Division Manager Access
+
+- Travel Team Access
+
+- GL Team Access
+
+- Treasury Access
+
+- Finance Access
+
+**Feature: Authorization**
+
+**User Stories**
+
+- Restrict Screens By Role
+
+- Restrict Actions By Role
+
+- Hide Unauthorized Menus

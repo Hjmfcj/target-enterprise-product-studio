@@ -1,0 +1,408 @@
+**MTN Sudan**
+
+**Travel Mission Management System**
+
+COMPREHENSIVE PROJECT ARTIFACTS — UPDATED AFTER BACKLOG ANALYSIS
+
+| **Document Version** | 3.0 — Post-Backlog Analysis |
+| --- | --- |
+| **Date** | 22 June 2026 |
+| **Prepared By** | Target Team (BA / SA / UX / QA) |
+| **Source Documents** | MTN_Travel_Product_Backlog_TFS.docx + All Prior Artifacts |
+| **Status** | ACTIVE — REQUIRES CLARIFICATION ON ITEMS MARKED BELOW |
+
+# SECTION 1 — REQUIREMENT EVIDENCE REVIEW
+
+Every item in the Product Backlog was reviewed against source documents. Items are classified as: EXPLICIT (directly stated), DERIVED (reasonably inferred from documented process), or MISSING (no supporting evidence found).
+
+## 1.1 Epic-Level Evidence Classification
+
+| **Epic ID** | **Epic Name** | **Source Document** | **Classification** | **Confidence** |
+| --- | --- | --- | --- | --- |
+| EP-01 | Dashboard | MoM §9, Travel_System_Req, Backlog | EXPLICIT | HIGH |
+| EP-02 | Mission Management | Travel_System_Req, MoM §1 | EXPLICIT | HIGH |
+| EP-03 | Mission Creation | MoM §1–§4, Process Doc | EXPLICIT | HIGH |
+| EP-04 | Approval Workflow | MoM Confirmed Workflow, MoM §5 | EXPLICIT | HIGH |
+| EP-05 | Travel Review | MoM §6, Backlog | EXPLICIT | HIGH |
+| EP-06 | GL Review | MoM §7, Confirmed Workflow | EXPLICIT | HIGH |
+| EP-07 | Treasury | MoM §8, Travel_System_Req | EXPLICIT | HIGH |
+| EP-08 | Mission Extension | MoM §10, Process Doc | EXPLICIT | HIGH |
+| EP-09 | Mission Closure | MoM §11, Travel_System_Req | EXPLICIT | HIGH |
+| EP-10 | Settlement | MoM §11, Process Doc | EXPLICIT | HIGH |
+| EP-11 | Reporting | Travel_System_Req (Screen Inventory) | EXPLICIT | HIGH |
+| EP-12 | Notifications | MoM §9 | EXPLICIT | HIGH |
+| EP-13 | Security & Roles | MoM §5, Travel_System_Req | EXPLICIT | HIGH |
+| EP-NEW-01 | HR Approval (NEW) | Meeting Transcript 11/06/2026 | EXPLICIT — NEW | HIGH |
+| EP-NEW-02 | Employee Grading (NEW) | Meeting Transcript 11/06/2026 | EXPLICIT — NEW | HIGH |
+
+## 1.2 New Requirements Identified from Product Backlog + Second Meeting Transcript
+
+**The second meeting transcript (11/06/2026) reveals requirements NOT present in the existing Product Backlog. These must be added:**
+
+| **#** | **New Requirement** | **Source** | **Impact** | **Action Required** |
+| --- | --- | --- | --- | --- |
+| NR-01 | HR must APPROVE International missions (not just be notified) | Transcript §4:06–§11:21 | Adds HR Approval step to International mission workflow. Extends EP-04. | ADD to Backlog EP-04 + EP-NEW-01 |
+| NR-02 | HR must be NOTIFIED (email) for National missions | Transcript §9:55–§11:03 | Adds HR notification trigger for National missions. Extends EP-12. | ADD to EP-12 |
+| NR-03 | Employee Grade/Level determines Accommodation rate (Level 2 to 3H have different amounts) | Transcript §48:55–§50:36 | Per Diem/Accommodation must be grade-linked. New data entity: Employee Grade. Impacts EP-03, EP-05, EP-06. | ADD to EP-NEW-02 + EP-03 |
+| NR-04 | Destination-based pricing matrix — rates differ by destination (e.g., Darfur higher rate) | Transcript §53:04–§53:49 + MoM Open Item 1 | Configurable destination pricing. Impacts Travel Cost Review. | CONFIRM with MTN Sudan — OPEN ITEM |
+| NR-05 | Mission cancellation before departure must be supported | Transcript §52:24 ('cancellation') | New status: Cancelled. New action on Mission Details/My Missions. | MISSING INFORMATION — CLARIFY RULES |
+| NR-06 | Monthly long-term missions: each month is a separate mission (no auto-extend) | Travel_System_Req Business Controls | Business rule must be enforced. Not in backlog. | ADD as Business Rule to EP-08 |
+| NR-07 | User provisioning is via Microsoft 365 — no manual add/remove in system | Transcript §7:59–§8:57 + MoM §13 | Impacts EP-13 Security & Roles. No user management screen needed. | UPDATE EP-13 scope |
+
+# SECTION 2 — GAP ANALYSIS
+
+Items identified as missing, incomplete, or conflicting across all source documents and the backlog.
+
+## 2.1 Missing Epics / Features in Current Backlog
+
+| **Gap ID** | **Gap Description** | **Source Evidence** | **Impact** | **Resolution** |
+| --- | --- | --- | --- | --- |
+| GAP-01 | HR Approval Epic entirely absent from backlog | Transcript 11/06/2026 §4:06 | International missions miss a workflow step | Create EP-NEW-01 HR Approval |
+| GAP-02 | Employee Grade entity not in backlog or data model | Transcript §48:55, §50:36 | Cost calculation incorrect without grade | Create EP-NEW-02; update data model |
+| GAP-03 | Mission Cancellation not in backlog | Transcript §52:24 | No way to cancel pre-departure mission | Add to EP-09 or new Feature |
+| GAP-04 | Destination Pricing Matrix configuration screen absent | MoM Open Item 1; Transcript §13:37 | Travel cost auto-calculation impossible | Add to EP-05 or Admin Epic |
+| GAP-05 | Long-term mission monthly re-creation rule not in backlog | Travel_System_Req Business Controls | EP-08 Extension scope is incorrect | Add business rule to EP-08 |
+| GAP-06 | Per Diem calculation formula not defined anywhere | MoM Open Item 2 | System cannot calculate without formula | MISSING INFO — MTN Sudan to provide |
+| GAP-07 | Accommodation calculation formula not defined | MoM Open Item 3 | System cannot calculate without formula | MISSING INFO — MTN Sudan to provide |
+| GAP-08 | HR Reporting requirements not defined | MoM Open Item 4 & 5 | EP-11 Reporting scope incomplete | MISSING INFO — pending HR session |
+| GAP-09 | Extension Approval sub-workflow not in EP-08 | MoM §10: 'same approval cycle' | EP-08 stories incomplete (no LM/DM approval) | Add approval user stories to EP-08 |
+| GAP-10 | EP-03: No 'Assigned Person vs Employee' field distinction in Create Mission | MoM §1 Action Item 1 | Mission creation form missing Employee Name field | Add story to EP-03 |
+| GAP-11 | EP-08: No recalculation of Per Diem / Accommodation on extension | MoM §10 | Incorrect cost totals after extension | Add story: Recalculate on Extension |
+| GAP-12 | EP-08: No 'Extended By' audit field | MoM §10 Action Item 3 | Extension not auditable/traceable | Add story: Record Extension Performer |
+
+## 2.2 Conflict Analysis
+
+| **ID** | **Conflict** | **Source A** | **Source B** | **Resolution Needed** |
+| --- | --- | --- | --- | --- |
+| CF-01 | UX HTML shows 'Submit to Finance GL' button on Travel Review screen | MTN_Travel_System_UX_Design.html | MoM Confirmed Workflow: Travel → GL → Treasury | RESOLVED: Button must read 'Submit to GL Review'. HTML design is incorrect. |
+| CF-02 | UX HTML shows 'Finance GL records amounts; HR logs absence' as Step 6 | MTN_Travel_System_UX_Design.html | MoM Confirmed Workflow — no such step | RESOLVED: Remove this step. Not a system step. |
+| CF-03 | Backlog EP-13 includes 'Finance Access' as a role but 'Finance' is not in MoM §5 Roles list | MTN_Travel_Product_Backlog_TFS.docx | MoM §5: Roles = Mission Creator / LM / DM / Travel / GL / Treasury | CLARIFY: Is Finance a separate role or is it GL Team? Confirm with MTN Sudan. |
+| CF-04 | UX HTML shows 'Archived' status after rejection | MTN_Travel_System_UX_Design.html | MoM: Rejected status only. No 'Archived' status defined. | RESOLVED: Remove Archived status. Use Rejected only. |
+| CF-05 | Backlog EP-08 Extension does not include approval steps (LM/DM/Travel/GL/Treasury) | MTN_Travel_Product_Backlog_TFS.docx EP-08 | MoM §10: Extensions follow same approval cycle as original mission | GAP: Add full approval cycle to EP-08 Extension Feature. |
+
+# SECTION 3 — UPDATED PRODUCT BACKLOG (Azure DevOps / TFS Ready)
+
+This backlog reflects the original document plus all additions and corrections from the Gap Analysis above. NEW items are marked [NEW]. UPDATED items are marked [UPDATED]. MISSING items await client clarification.
+
+## EPIC EP-01 — Dashboard
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Dashboard KPIs | View Dashboard KPIs │ View Open Missions Count │ View Active Missions Count │ View Pending Settlement Count |
+| Pending Approvals Widget | View Pending Approvals │ Navigate from Dashboard to Details |
+| Pending Payments Widget | View Pending Payments |
+| Quick Actions | Navigate from Dashboard to Details |
+
+## EPIC EP-02 — Mission Management
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Mission List | View Mission List │ Search Missions │ Filter by Status │ Filter by Mission Type │ Filter by Employee │ Filter by Date Range │ Sort Missions │ Export Mission List |
+| Mission Details | View Mission Details │ View Cost Breakdown │ View Approval History │ View Settlement History │ View Attachments |
+| My Missions | View My Missions │ Track Mission Status │ Search My Missions │ Filter My Missions |
+
+## EPIC EP-03 — Mission Creation
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Create Mission | Create New Mission │ Select Mission Type (National/International) │ Select Mission Category (Training/Conference/Job Mission) │ Select Destination │ Enter Assigned Person │ Enter Employee Name [UPDATED per MoM §1 Action Item 1] │ Select Start Date │ Select End Date │ Enter Mission Purpose │ Upload Supporting Documents │ Save Draft │ Submit Mission |
+| Validation | Validate Mandatory Fields │ Prevent Invalid Dates │ Validate Attachments │ Display Validation Messages │ Auto-determine Currency by Mission Type [UPDATED per MoM §3] |
+| Business Rules | BR-01: Employee cannot have more than one open mission at a time │ BR-02: National Mission currency = SDG │ BR-03: International Mission currency = USD │ BR-04: Mission Category must be one of: Training, Conference, Job Mission |
+
+## EPIC EP-04 — Approval Workflow [UPDATED — HR Added]
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Line Manager Approval | View Pending LM Requests │ Approve Request │ Reject Request │ Add Approval Notes │ View Mission Details Before Approval |
+| Division Manager Approval | View Pending DM Requests │ Approve Request │ Reject Request │ Add Notes │ View Mission Details Before Approval |
+| [NEW] HR Approval (International only) | [NEW] View Pending HR Approval Requests │ [NEW] Approve International Mission │ [NEW] Reject International Mission │ [NEW] Add HR Notes │ Source: Transcript 11/06/2026 §4:06–§11:21 |
+| [NEW] HR Notification (National) | [NEW] Send HR Notification on National Mission Submission │ Source: Transcript §9:55–§11:03 |
+
+## EPIC EP-05 — Travel Review
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Travel Cost Review | View Pending Travel Reviews │ Enter Per Diem │ Enter Accommodation Cost │ Enter Other Expenses │ Modify Cost Values │ Reject Request │ Submit To GL [CORRECTED — was 'Submit to Treasury'] |
+| Travel Cost Validation | Calculate Mission Total │ Recalculate Cost After Modification │ Display Cost Summary |
+| [MISSING] Destination Pricing Config | MISSING INFORMATION — Destination-based pricing matrix not yet provided by MTN Sudan (MoM Open Item 1). Rate configuration screen design is BLOCKED. |
+
+## EPIC EP-06 — GL Review
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Financial Validation | View Pending GL Requests │ Review Costs │ Modify Financial Values │ Reject Request │ Submit To Treasury |
+| GL Audit | View Travel Calculations │ View Financial Summary │ Record GL Notes |
+
+## EPIC EP-07 — Treasury
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Payment Processing | View Pending Payments │ Enter Payment Reference │ Enter Payment Date │ Add Treasury Notes │ Confirm Payment │ Mark Mission Active |
+| Treasury Tracking | View Payment History │ Search Payments │ Filter Payments |
+| Business Rule | BR-05: Treasury does NOT approve or reject. Treasury confirms payment only. Once confirmed, mission status = Mission Active. |
+
+## EPIC EP-08 — Mission Extension [UPDATED — Approval Cycle + Recalculation Added]
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Extension Request | Request Mission Extension │ Enter New End Date │ Enter Extension Reason │ Submit Extension Request │ [NEW] Recalculate Per Diem on Extension │ [NEW] Recalculate Accommodation on Extension │ [NEW] Record Extended By (user + timestamp) — Source: MoM §10 Action Item 3 |
+| [NEW] Extension Approval Cycle | [NEW] Extension LM Approval │ [NEW] Extension DM Approval │ [NEW] Extension HR Approval (International) │ [NEW] Extension Travel Review │ [NEW] Extension GL Review │ [NEW] Extension Treasury Payment — Source: MoM §10: 'same workflow and approval cycle' |
+| Extension Tracking | View Extension History │ View Extension Status │ View Approval History |
+| Business Rule | BR-06: Long-term missions (monthly) must be closed and a new mission created. Auto-extension is NOT supported. Each monthly mission is independent. — Source: Travel_System_Req Business Controls |
+
+## EPIC EP-09 — Mission Closure [UPDATED — Cancellation Added]
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Mission Closure | Close Mission │ Upload Closure Documents │ Submit Closure |
+| Closure Tracking | View Uploaded Documents │ View Closure Status |
+| [NEW] Mission Cancellation | [NEW] Cancel Mission (pre-departure) │ [NEW] Record Cancellation Reason │ Source: Transcript §52:24 — MISSING INFORMATION: Cancellation rules, eligible statuses for cancellation, and impact on paid advances must be clarified by MTN Sudan. |
+
+## EPIC EP-10 — Settlement
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Settlement Processing | View Pending Settlements │ Enter Actual Costs │ Compare Planned vs Actual │ Calculate Balance │ Add Settlement Reference │ Process Settlement |
+| Debit/Credit Management | Identify Employee Debit │ Identify Employee Credit │ Display Settlement Result |
+
+## EPIC EP-11 — Reporting [UPDATED — HR Reports Pending]
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Employee Mission History | View Employee History │ Search Employee History │ Filter Employee History │ Export Employee History |
+| Debit/Credit Report | View Debit Report │ View Credit Report │ Search Report │ Filter Report │ Export Report |
+| [MISSING] HR Reports | MISSING INFORMATION — HR Reporting & Visibility Requirements (MoM Open Items 4 & 5). HR session not yet held. All HR report stories are BLOCKED pending HR workshop. |
+
+## EPIC EP-12 — Notifications [UPDATED — HR Notification Added]
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Workflow Notifications | Notify LM │ Notify DM │ Notify Travel Team │ Notify GL Team │ Notify Treasury │ Notify Employee After Payment │ Notify Employee On Rejection │ [NEW] Notify HR on National Mission Approval │ [NEW] Notify HR on International Mission for Approval |
+| Business Rule | BR-07: All notifications are via Email. Dashboard displays current status for authorized users — Source: MoM §9 |
+
+## EPIC EP-13 — Security & Roles [UPDATED]
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Role Management | Assigned Person Access │ Line Manager Access │ Division Manager Access │ Travel Team Access │ GL Team Access │ Treasury Access │ Finance Access │ [NEW] HR Access — Source: Transcript §7:59, MoM §13 |
+| Authorization | Restrict Screens By Role │ Restrict Actions By Role │ Hide Unauthorized Menus |
+| [UPDATED] User Provisioning | [UPDATED] User provisioning is managed via Microsoft 365 / Azure AD. No manual user add/remove screen is required in this system. System automatically recognizes M365 users. — Source: Transcript §7:59–§8:57 + MoM §13 |
+
+## [NEW] EPIC EP-NEW-01 — HR Approval
+
+**Source: Second Meeting Transcript 11/06/2026. This epic was entirely absent from the original backlog.**
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| HR Approval (International) | View Pending HR International Mission Requests │ Approve International Mission │ Reject International Mission │ Add HR Notes │ View Mission Details Before HR Decision |
+| HR Notification (National) | Receive Email Notification on National Mission Submission │ View National Mission Notification History |
+| MISSING INFORMATION | HR approval placement in the workflow is not confirmed: Is HR approval before or after DM approval? Does HR rejection return to Assigned Person? What HR notification content is required for National missions? MTN Sudan HR session required. |
+
+## [NEW] EPIC EP-NEW-02 — Employee Grading
+
+**Source: Second Meeting Transcript 11/06/2026 §48:55. Employee grade determines accommodation rate.**
+
+| **Feature** | **User Stories** |
+| --- | --- |
+| Grade-Based Cost | Auto-Apply Accommodation Rate by Employee Grade │ Display Grade-Linked Rate in Travel Review │ Support Grade Levels: Level 2 to Level 3H (exact range TBC by MTN Sudan) |
+| MISSING INFORMATION | Exact grade levels and corresponding accommodation rates must be provided by MTN Sudan. Grade structure (Level 2 to Level 3H) referenced in transcript but not formally documented. |
+
+# SECTION 4 — UPDATED WORKFLOW (Post-Backlog Analysis)
+
+The following workflow replaces all prior workflow diagrams. It incorporates the HR step confirmed in the second meeting transcript.
+
+## 4.1 Updated Confirmed Workflow
+
+| **Step** | **Stage** | **Actor** | **Applies To** |
+| --- | --- | --- | --- |
+| 1 | Mission Request | Assigned Person | All |
+| 2 | Line Manager Approval | Line Manager | All |
+| 3 | Division Manager / GM Approval | Division Manager | All |
+| 3A | HR Approval [NEW — International Only] | HR Team | International Only |
+| 3B | HR Notification [NEW — National Only] | System → HR Email | National Only |
+| 4 | Travel Team Review | Travel Team | All |
+| 5 | GL Review [CORRECTED — precedes Treasury] | GL Team | All |
+| 6 | Treasury Payment | Treasury Team | All |
+| 7 | Mission Active | System (Auto) | All |
+| 8* | Mission Extension (Optional — repeats steps 2–7) | Assigned Person initiates | Optional |
+| 9 | Mission Closure | Assigned Person | All |
+| 10 | Finance Settlement | Finance Team | All |
+| 11 | Mission Completed | System (Auto) | All |
+
+* Step 8 (Extension) follows the same full approval cycle as the original mission (Steps 2–7) per MoM §10.
+
+## 4.2 Mission Statuses (Complete List)
+
+| **Status** | **Description** | **Source** |
+| --- | --- | --- |
+| Draft | Saved but not submitted | Travel_System_Req |
+| Pending Line Manager Approval | Submitted; awaiting LM | Travel_System_Req |
+| Pending Division Manager Approval | LM approved; awaiting DM | Travel_System_Req |
+| Pending HR Approval [NEW] | DM approved; awaiting HR (International only) | Transcript 11/06/2026 |
+| Pending Travel Review | All approvals done; awaiting Travel Team | Travel_System_Req |
+| Pending GL Review [NEW Status Label] | Travel review done; awaiting GL Team | MoM Confirmed Workflow |
+| Pending Payment | GL approved; awaiting Treasury | Travel_System_Req |
+| Mission Active | Payment confirmed; mission underway | Travel_System_Req |
+| Mission Extended | Extension approved and paid | Travel_System_Req |
+| Mission Closed | Closure submitted; pending settlement | Travel_System_Req |
+| Pending Settlement | Awaiting Finance settlement | Travel_System_Req |
+| Completed | Settlement done; mission fully closed | Travel_System_Req |
+| Rejected | Rejected at any approval stage | MoM Notes |
+| Cancelled [NEW — MISSING INFO] | MISSING INFORMATION — Cancellation rules not defined | Transcript §52:24 |
+
+# SECTION 5 — TFS-READY USER STORIES (Key New & Updated Stories)
+
+Full user stories below follow the standard format. Only new and updated stories are shown; existing stories in the original backlog retain their structure.
+
+## US-EP04-LM-001 — Approve Mission Request (Line Manager)
+
+| **Title** | Approve Mission Request — Line Manager |
+| --- | --- |
+| As a | Line Manager |
+| I want to | review and approve or reject a mission request submitted by an Assigned Person |
+| So that | the mission can proceed to Division Manager approval |
+| **Acceptance Criteria** | Given I am logged in as Line Manager; When I open Pending Approvals; Then I see all missions pending my approval with Mission ID, Employee Name, Destination, Dates, Type; When I click Approve with optional note; Then status changes to Pending Division Manager Approval and DM is notified by email; When I click Reject with mandatory note; Then status changes to Rejected and Assigned Person is notified. |
+| Priority | HIGH |
+| Source | MoM Confirmed Workflow + MoM §5 |
+| Dev Status | READY FOR DEVELOPMENT |
+
+## [NEW] US-EP-NEW01-HR-001 — HR Approval of International Mission
+
+| **Title** | [NEW] HR Approve International Mission |
+| --- | --- |
+| As a | HR Team Member |
+| I want to | review and approve or reject an International mission after Division Manager approval |
+| So that | International missions have HR sign-off before Travel Review proceeds |
+| **Acceptance Criteria** | Given I am logged in as HR; When an International mission is approved by DM; Then I see it in my Pending Approvals; When I Approve; Then status = Pending Travel Review and Travel Team is notified; When I Reject; Then status = Rejected and Assigned Person is notified. |
+| Priority | HIGH |
+| Source | Transcript 11/06/2026 §4:06–§11:21 |
+| **Dev Status** | NEEDS CLARIFICATION — Workflow position of HR approval step must be formally confirmed by MTN Sudan. Is HR before or after DM? Is HR involved in National missions at all? |
+
+## [NEW] US-EP-NEW02-GRD-001 — Grade-Based Accommodation Rate
+
+| **Title** | [NEW] Apply Grade-Based Accommodation Rate at Mission Creation |
+| --- | --- |
+| As a | Travel Team Member |
+| I want to | see the accommodation cost automatically calculated based on the employee's grade level |
+| So that | Travel Review accurately reflects the correct allowance for each employee's grade |
+| **Business Rule** | Accommodation rate varies by employee grade (Level 2 to Level 3H). Exact rates to be provided by MTN Sudan. |
+| Source | Transcript 11/06/2026 §48:55–§50:36 |
+| **Dev Status** | BLOCKED — Grade levels and rate matrix not yet provided by MTN Sudan (MoM Open Item 1 related). |
+
+## [UPDATED] US-EP08-EXT-001 — Mission Extension Recalculation
+
+| **Title** | [UPDATED] Recalculate Costs on Mission Extension |
+| --- | --- |
+| As a | Assigned Person |
+| I want to | submit a mission extension with a new end date and have Per Diem and Accommodation recalculated |
+| So that | the extension accurately reflects the additional cost for the extended period |
+| **Acceptance Criteria** | Given mission status = Mission Active; When I submit an extension with New End Date; Then system calculates extension days = New End Date - Current End Date; Then Per Diem recalculates for extension days; Then Accommodation recalculates for extension nights; Then new total is displayed for Travel Review; Then Extended By field records my user ID and timestamp. |
+| Source | MoM §10 |
+| Dev Status | NEEDS CLARIFICATION — Per Diem and Accommodation formulas not yet provided (MoM Open Items 2 & 3). |
+
+# SECTION 6 — CLARIFICATION QUESTIONS
+
+The following questions must be answered before development of the affected items can begin.
+
+## 6.1 Business Questions (MTN Sudan)
+
+| **Q#** | **Question** | **Impact** | **Blocking** |
+| --- | --- | --- | --- |
+| BQ-01 | Where exactly in the approval workflow does HR approval occur for International missions? Before or after DM? | EP-NEW-01, EP-04, workflow diagram, system statuses | YES — EP-NEW-01 BLOCKED |
+| BQ-02 | What are the exact employee grade levels and their corresponding accommodation rates? | EP-NEW-02, EP-05, cost calculation | YES — EP-NEW-02 BLOCKED |
+| BQ-03 | What is the Per Diem calculation formula? (flat daily rate × days? tiered?) | EP-05, EP-08, Settlement | YES — Travel Review BLOCKED |
+| BQ-04 | What is the Accommodation calculation formula? (rate × nights? grade-based?) | EP-05, EP-08, Settlement | YES — Travel Review BLOCKED |
+| BQ-05 | What are the destination-based pricing rates? (Darfur higher per transcript) | EP-05 Travel Cost Review | YES — Auto-calc BLOCKED |
+| BQ-06 | Can a mission be cancelled after payment? If so, how is the advance recovered? | EP-09 Mission Cancellation feature | YES — EP-09 New Feature BLOCKED |
+| BQ-07 | Is 'Finance' a separate role from 'GL Team' or are they the same? | EP-13, EP-10 Settlement role assignment | Partial — EP-13 incomplete |
+| BQ-08 | What HR reporting requirements are needed? (pending HR workshop) | EP-11 Reporting | YES — HR Reports BLOCKED |
+| BQ-09 | Does HR approval on extension follow the same rule (International = approve, National = notify)? | EP-08 Extension Approval Cycle | Partial — EP-08 incomplete |
+
+# SECTION 7 — REQUIREMENTS TRACEABILITY MATRIX (RTM)
+
+Maps Business Objectives → Requirements → Epics → User Stories → Status. Updated to reflect all backlog additions.
+
+| **RTM ID** | **Business Objective** | **Epic** | **User Story Sample** | **Source** | **Status** |
+| --- | --- | --- | --- | --- | --- |
+| RTM-01 | Automate mission creation and submission | EP-03 Mission Creation | Create New Mission; Submit Mission; Validate Fields | MoM §1; Travel_Req | READY |
+| RTM-02 | Enforce multi-level approval workflow | EP-04 Approval | LM Approve; DM Approve; HR Approve (International) | MoM Workflow; Transcript | PARTIAL — HR step needs clarification |
+| RTM-03 | Calculate and validate travel costs | EP-05 Travel Review + EP-NEW-02 Grading | Enter Per Diem; Grade-Based Rate; Submit to GL | MoM §4,§6; Transcript §48 | BLOCKED — formulas + grades missing |
+| RTM-04 | GL financial validation before Treasury payment | EP-06 GL Review | Review Costs; Submit to Treasury | MoM §7 | READY |
+| RTM-05 | Process mission payment via Treasury | EP-07 Treasury | Confirm Payment; Mark Mission Active | MoM §8 | READY |
+| RTM-06 | Support mission extension with full re-approval | EP-08 Extension | Request Extension; Recalculate Costs; Full Approval Cycle | MoM §10 | NEEDS CLARIFICATION |
+| RTM-07 | Mission closure and financial settlement | EP-09 + EP-10 | Close Mission; Process Settlement; Debit/Credit | MoM §11 | READY |
+| RTM-08 | Role-based access control via M365 | EP-13 Security | Restrict by Role; M365 Provisioning | MoM §5,§13; Transcript | UPDATED |
+| RTM-09 | Email notifications at each workflow stage | EP-12 Notifications | Notify LM/DM/Travel/GL/Treasury/HR/Employee | MoM §9; Transcript | UPDATED — HR added |
+| RTM-10 | HR governance over International missions [NEW] | EP-NEW-01 HR Approval | HR Approve International; HR Notify National | Transcript §4:06 | NEEDS CLARIFICATION |
+| RTM-11 | Grade-linked accommodation allowances [NEW] | EP-NEW-02 Grading | Auto-apply grade rate; display in Travel Review | Transcript §48:55 | BLOCKED |
+
+# SECTION 8 — UAT SCENARIOS (New & Updated)
+
+## UAT-EP04-LM-001 — Line Manager Approves Mission
+
+| **Preconditions** | Mission exists in status 'Pending Line Manager Approval'. User logged in as Line Manager. |
+| --- | --- |
+| Step 1 | Navigate to Pending Approvals. |
+| Step 2 | Select the mission. View details. |
+| Step 3 | Click Approve. Add optional note. Confirm. |
+| **Expected Result** | Mission status = Pending Division Manager Approval. DM receives email notification. Mission no longer appears in LM pending list. |
+| **Negative Test** | Reject without entering a reason → system should prevent rejection and show validation error. |
+
+## [NEW] UAT-EP-NEW01-HR-001 — HR Approves International Mission
+
+| **Preconditions** | International Mission in status 'Pending HR Approval'. User logged in as HR Team Member. |
+| --- | --- |
+| Step 1 | Navigate to Pending Approvals (HR view). |
+| Step 2 | Review mission details including destination, employee, dates, type. |
+| Step 3 | Click Approve. Mission progresses. |
+| **Expected Result** | Mission status = Pending Travel Review. Travel Team receives email notification. |
+| **Edge Case** | National Mission should NOT appear in HR Pending Approvals — only notification sent. Verify HR cannot take action on National missions. |
+
+## [UPDATED] UAT-EP08-EXT-001 — Mission Extension Recalculates Costs
+
+| **Preconditions** | Mission in status 'Mission Active'. Pricing matrix configured. User = Assigned Person. |
+| --- | --- |
+| Step 1 | Navigate to Mission Extensions. Click Request Extension. |
+| Step 2 | Enter New End Date (later than current end). Enter Extension Reason. |
+| Step 3 | System calculates extension days and shows new Per Diem + Accommodation totals. Submit. |
+| **Expected Result** | Extension request enters approval chain (LM → DM → HR if International → Travel → GL → Treasury). 'Extended By' field records submitting user and timestamp. |
+| **Negative Test** | Enter New End Date earlier than current end date → validation error. System must reject. |
+
+# SECTION 9 — SUMMARY OF ALL CHANGES TO PROJECT ARTIFACTS
+
+This section provides a consolidated change log showing every artifact that was updated as a result of the Product Backlog analysis.
+
+| **Artifact** | **Change Type** | **Description** | **Source** |
+| --- | --- | --- | --- |
+| Product Backlog | NEW EPIC Added | EP-NEW-01: HR Approval (International + National notification) | Transcript 11/06/2026 |
+| Product Backlog | NEW EPIC Added | EP-NEW-02: Employee Grade-Based Cost Calculation | Transcript 11/06/2026 |
+| EP-03 | UPDATED — Field Added | Employee Name field added to Create Mission (distinct from Assigned Person) | MoM §1 Action Item 1 |
+| EP-04 | UPDATED — Workflow Step Added | HR Approval added after DM for International; HR Notification for National | Transcript §4:06–§11:21 |
+| EP-05 | UPDATED — Button Label Corrected | Travel Review submits to GL (not directly to Treasury). 'Submit to GL' confirmed. | MoM Confirmed Workflow |
+| EP-08 | UPDATED — Major Addition | Full approval cycle added to Extension. Recalculation added. 'Extended By' audit field added. | MoM §10 Action Items 2,3 |
+| EP-09 | UPDATED — Feature Added | Mission Cancellation feature added (rules MISSING — awaiting MTN Sudan) | Transcript §52:24 |
+| EP-12 | UPDATED — HR Notifications | HR notification stories added for both International (approval) and National (info) | Transcript §9:55–§11:03 |
+| EP-13 | UPDATED — M365 Provisioning | User management scope reduced: no manual add/remove screen. M365 Auto-provisioning. | Transcript §7:59 + MoM §13 |
+| EP-13 | UPDATED — HR Role Added | HR Team added as a defined system role | Transcript §4:06 |
+| Workflow | UPDATED — Steps 3A,3B Added | HR Approval (International) and HR Notification (National) inserted after DM step | Transcript §11:03 |
+| Status List | UPDATED — New Status | Pending HR Approval status added. Pending GL Review labeled. Cancelled added (MISSING INFO). | MoM + Transcript |
+| UX Design HTML | DEFECTS — 10 Issues | Per MTN_Travel_System_Figma_Spec.md Phase 1: incorrect buttons, archived status, HR/GL steps, notifications, delta indicators. | Figma Spec Phase 1 Audit |
+| Roles | NEW ROLE | HR Team Role added to role-based access control | Transcript §4:06 |
+| BLOCKED Items | 7 Items Blocked | Per Diem formula, Accommodation formula, Destination pricing matrix, Employee grade rates, HR approval workflow position, HR reporting requirements, Cancellation rules | MoM Open Items 1–5 + Gaps |
+
+## 9.1 Development Readiness Summary
+
+| **Category** | **Count** | **Action** |
+| --- | --- | --- |
+| Epics — Original (validated) | 13 | Proceed to development (with updates) |
+| Epics — New (from backlog analysis) | 2 | Needs MTN Sudan confirmation first |
+| Gaps Identified | 12 | Address before sprint planning |
+| Conflicts Resolved | 3 of 5 | 2 need MTN Sudan clarification |
+| Clarification Questions | 9 | MTN Sudan to answer |
+| User Stories — READY | ~65% | Can begin sprint planning |
+| User Stories — NEEDS CLARIFICATION | ~25% | Awaiting client input |
+| User Stories — BLOCKED | ~10% | Cannot estimate or build |
+
+Document prepared by: Target Team — Senior Business Analyst / Solution Architect / UX Architect
+
+All requirements sourced exclusively from uploaded project documents. No assumptions or hallucinations introduced.

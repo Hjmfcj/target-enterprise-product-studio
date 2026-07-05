@@ -1,0 +1,32 @@
+# RAID Log — MTN Sudan Travel Mission Management System
+
+## Purpose
+Consolidated Risks, Assumptions, Issues, Dependencies for this project, per [00_Governance/README.md](README.md).
+
+## Scope
+Sourced from `APPROVED_SOURCE_OF_TRUTH_MTN_Travel_v3_docx.docx` Section 2 (Gap Analysis) and Section 6 (Clarification Questions), the original MoM Open Items, and Daily Scrum blockers.
+
+## Intended Usage
+Add rows; never delete — update Status instead.
+
+| Item ID | Category | Description | Raised By | Date Raised | Owner | Impact | Mitigation/Response | Status | Related Reference |
+|---|---|---|---|---|---|---|---|---|---|
+| R-01 | Dependency | Destination Pricing Matrix not yet provided | MTN Sudan (Open Item 1) | Session 1 | MTN Sudan | Blocks Travel Cost Review auto-calculation (EP-05) | Target proposing sample data interim approach (Decision D-14) | Open | BRD Open Questions; BQ-05 |
+| R-02 | Dependency | Per Diem Calculation Formula not yet provided/confirmed | MTN Sudan (Open Item 2) | Session 1 | MTN Sudan | Blocks Travel Review cost calculation, Extension recalculation, Settlement | Target proposed standard formula (Days × Rate) pending MTN confirmation | Open — Proposed formula awaiting confirmation | BQ-03 |
+| R-03 | Dependency | Accommodation Calculation Formula not yet provided/confirmed | MTN Sudan (Open Item 3) | Session 1 | MTN Sudan | Blocks Travel Review cost calculation, Extension recalculation, Settlement | Target proposed standard formula (Nights × Rate) pending MTN confirmation | Open — Proposed formula awaiting confirmation | BQ-04 |
+| R-04 | Dependency | HR Notification Requirements not yet defined | MTN Sudan (Open Item 4) | Session 1 | MTN Sudan | Blocks EP-12 HR notification content/design | HR workshop agreed but not yet evidenced as held | Open | BQ-08 |
+| R-05 | Dependency | HR Reporting & Visibility Requirements not yet defined | MTN Sudan (Open Item 5) | Session 1 | MTN Sudan | Blocks EP-11 HR reporting scope | HR workshop agreed but not yet evidenced as held | Open | BQ-08 |
+| R-06 | Issue / Gap | HR Approval Epic (EP-NEW-01) entirely absent from original Product Backlog; only surfaced in second-session transcript | Target Team (Gap Analysis) | Post-11 Jun 2026 session | Target Team / MTN Sudan | International mission workflow missing a governance step until added | Added as EP-NEW-01 in source-of-truth v3; workflow position (before/after DM) unconfirmed | Open — NEEDS CLARIFICATION | GAP-01, BQ-01 |
+| R-07 | Assumption — flagged for confirmation | Employee Grade (Level 2 to Level 3H) determines Accommodation rate | Transcript §48:55–§50:36 | 11 Jun 2026 | MTN Sudan | Cost calculation incorrect without confirmed grade/rate matrix | New entity EP-NEW-02 added; exact grade levels/rates MISSING INFORMATION | Open — BLOCKED | GAP-02, BQ-02 |
+| R-08 | Issue / Gap | Mission Cancellation (pre-departure) mentioned but rules undefined | Transcript §52:24 | 11 Jun 2026 | MTN Sudan | No governed way to cancel a mission before departure; advance-recovery rules unknown | Added as new feature under EP-09 pending rules | Open — MISSING INFORMATION | GAP-03, BQ-06 |
+| R-09 | Business Rule (confirmed, not a risk) | Long-term missions: each month is a separate mission; no auto-extension | `Travel_System_Requirements.docx` Business Controls | Session 1 | N/A | EP-08 scope correction | Documented as BR-06 in Backlog | Closed — Rule confirmed | GAP-05 |
+| R-10 | Issue / Gap | Extension Approval sub-workflow (LM→DM→HR→Travel→GL→Treasury) not represented in original EP-08 Extension feature | Target Team (Gap Analysis) vs. MoM §10 ("same approval cycle") | Session 1 / post-analysis | Target Team | EP-08 stories incomplete without this addition | Added to source-of-truth v3 Section 3 | Closed — Addressed in updated backlog; HR sub-step within extension still NEEDS CLARIFICATION (BQ-09) | GAP-09, BQ-09 |
+| R-11 | Assumption — flagged for confirmation | "Finance" role vs. "GL Team" role — Product Backlog TFS lists "Finance Access" as a role but MoM §5 roles list does not include "Finance" separately | `MTN_Travel_Product_Backlog_TFS.docx` vs. MoM §5 | Post-session comparison | MTN Sudan | EP-13 Security & Roles and EP-10 Settlement role assignment incomplete | Flagged as Conflict CF-03 in source-of-truth v3 | Open — CLARIFICATION REQUIRED | BQ-07 |
+| R-12 | Blocker (Sprint-level, carried across daily scrums) | SharePoint Groups/permissions configuration unresolved | Daily Scrum 29 Jun 2026 (B-01) | 29 Jun 2026 | Hassan Mohamed / Walaa Hamdy / Mohamed Bayoumi | Blocks Create Mission screen development | Being worked; not resolved as of the most recent daily-scrum artifact reviewed (30 Jun 2026) | Open | MOM Log Entry 4, Entry 5 |
+| R-13 | Assumption — flagged for confirmation | Mission Extension may or may not permit an additional financial amount beyond duration extension | Daily Scrum 29 Jun 2026 (C-01) | 29 Jun 2026 | MTN Sudan / Hassan Mohamed | Extension scope for financial handling unclear (BC-01/CQ-N1 per project context) | Not resolved in any uploaded artifact | Open — NEEDS CLARIFICATION | MOM Log Entry 4 |
+| R-14 | Dependency | POC/Dev environment access (SharePoint site link + test user accounts) requested from MTN Sudan; not confirmed as delivered in any uploaded artifact | Target (`629_email_...pdf`) | 29 Jun 2026 | MTN Sudan | Blocks deployment of POC into MTN environment | Awaiting MTN Sudan response | Open | Action Log A-16 |
+| R-15 | Issue | Milestone/Sprint date inconsistency: Milestone 1 delivery stated as 15 July 2026 (client email) vs. Sprint 1 end date stated as 12 July 2026 (internal daily scrum MoM) | `629_email_...pdf` vs. `MOM_Daily_Scrum_29June2026.docx` | 29 Jun 2026 | Target Team (internal) | Risk of misaligned client expectation vs. internal sprint boundary | Not reconciled in any uploaded artifact | Open — CLARIFICATION REQUIRED | Project_Metadata.md |
+| R-16 | Issue | Branding/domain inconsistency: client-facing emails use `@target-is.com`; internal Daily Scrum invite uses `@Uranium-Corp.com` for the same individuals | `Outlook_Document.PDF` vs. `Outlook_Document1.PDF` | 28 Jun 2026 | Target Team (internal) | Ambiguity in company/brand identity for internal vs. external documentation | Not explained in any uploaded artifact | Open — CLARIFICATION REQUIRED | Project_Metadata.md |
+
+## Future Expansion
+Will be updated as MTN Sudan formally responds to open clarification items and as the HR workshop is held.

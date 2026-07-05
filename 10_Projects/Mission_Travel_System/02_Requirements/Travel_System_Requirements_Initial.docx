@@ -1,0 +1,133 @@
+# Travel System Requirements
+
+## System Overview
+
+The system manages employee travel missions from request creation until financial settlement and closure.
+
+Mission Types: National, International.
+
+The system automates approvals, travel cost calculation, payment processing, mission closure, and financial settlement.
+
+## Workflow
+
+Assigned Person creates mission request.
+
+Line Manager approves.
+
+Division Manager approves.
+
+Travel Team reviews and enters travel costs.
+
+Treasury processes payment.
+
+Mission becomes active.
+
+Mission may be extended if required.
+
+Assigned Person closes mission.
+
+Finance performs settlement.
+
+Mission is completed.
+
+## User Roles
+
+Assigned Person
+
+Line Manager
+
+Division Manager
+
+Travel Team
+
+Treasury
+
+Finance
+
+HR
+
+## Mission Statuses
+
+Draft
+
+Pending Line Manager Approval
+
+Pending Division Manager Approval
+
+Pending Travel Review
+
+Pending Payment
+
+Mission Active
+
+Mission Extended
+
+Mission Closed
+
+Pending Settlement
+
+Completed
+
+Rejected
+
+## Business Controls
+
+Employee cannot have more than one open mission.
+
+National and International missions are supported.
+
+National missions use local currency.
+
+International missions use foreign currency.
+
+Destination list is configurable.
+
+Mission extension is supported.
+
+Long-term missions are handled as separate monthly missions.
+
+## Navigation Menu
+
+Dashboard
+
+Mission Management
+- Mission List
+- Create Mission
+- My Missions
+
+Approvals
+- Pending Approvals
+
+Travel Review
+- Travel Cost Review
+
+Treasury
+- Payments
+
+Mission Closure
+- Mission Closure
+- Mission Extensions
+
+Finance
+- Settlements
+
+Reports
+- Employee Mission History
+- Debit / Credit Report
+
+## Screen Inventory
+
+| Screen Name | Purpose | Primary User |
+| --- | --- | --- |
+| Dashboard | View mission statistics and pending actions | All Users |
+| Mission List | View and search all missions | Assigned Person |
+| Create Mission | Create a new mission request | Assigned Person |
+| Mission Details | View mission information and workflow progress | All Users |
+| Pending Approvals | Approve or reject mission requests | Line Manager, Division Manager |
+| Travel Cost Review | Enter and review travel-related costs | Travel Team |
+| Payments | Review approved amounts and confirm payment | Treasury |
+| Mission Extensions | Request and manage mission extensions | Assigned Person |
+| Mission Closure | Close mission and upload supporting documents | Assigned Person |
+| Settlements | Calculate and process mission settlement | Finance |
+| Employee Mission History Report | View mission history by employee | Finance |
+| Debit / Credit Report | View employee balances and settlement results | Finance |

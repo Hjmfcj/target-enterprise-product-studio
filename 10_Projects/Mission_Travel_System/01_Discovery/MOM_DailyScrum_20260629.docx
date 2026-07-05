@@ -1,0 +1,57 @@
+**   MTN Sudan — Mission Management System**   |   Daily Scrum — Minutes of Meeting
+
+**MINUTES OF MEETING**
+
+Daily Scrum  ·  MTN Sudan – Mission Management System  ·  June 29, 2026
+
+**1. Meeting Information**
+
+| **Date: **June 29, 2026 | **Time: **12:01 PM UTC | **Duration: **~4 minutes | **Type: **Daily Scrum |
+| --- | --- | --- | --- |
+| **Project: **MTN Sudan – Mission Management System | **Sprint: **Sprint 1 (28 Jun – 12 Jul 2026) | **Facilitator: **NOT PRESENT (Shehab absent) | **Recorded By: **Auto-transcript |
+
+**2. Attendees**
+
+| **Name** | **Role** | **Status** |
+| --- | --- | --- |
+| **Hassan Mohamed** | Developer – Front-End / Portal | **Present** |
+| **Mohamed Bayoumi** | Developer – Backend / Lists | **Present** |
+| **Abdelrahman Hamdy** | QA Engineer | **Present** |
+| **Shehabeldin Yehia** | Product Owner | **Absent** |
+
+**3. Team Updates**
+
+| **Team Member** | **Update** | **Evidence** |
+| --- | --- | --- |
+| **Hassan Mohamed** | Started design work on Create Mission screen | *Timestamp 1:47* |
+| **Mohamed Bayoumi** | Adjustments done on Destination list (with Hassan) | *Timestamp 1:21–1:40* |
+| **Abdelrahman Hamdy** | Completed test cases for the Mission module | *Timestamp 2:03* |
+
+**4. Sprint 1 Scope — Confirmed in Meeting**
+
+| **#** | **Sprint 1 Item** | **Evidence** |
+| --- | --- | --- |
+| **1** | Mission Log List | *Timestamp 2:29* |
+| **2** | Create Mission | *Timestamp 2:29* |
+| **3** | My Mission | *Timestamp 2:29* |
+| **4** | Mission Extension | *Timestamp 2:29; Extension confirmed to extend duration — Timestamp 2:50* |
+
+**5. Blockers**
+
+| **#** | **Owner** | **Blocker** |
+| --- | --- | --- |
+| **B-01** | Hassan Mohamed | **Group configuration not yet resolved — blocking Create Mission development** |
+
+**6****. Action Items**
+
+| **#** | **Action** | **Due Date** | **Owner** | **Status** |
+| --- | --- | --- | --- | --- |
+| **A-01** | Resolve Group configuration to unblock Create Mission development | *NOT DISCUSSED* | Hassan Mohamed | **Open** |
+| **A-02** | Deliver Create Mission design work | *Possibly tomorrow or day after * | Hassan Mohamed | **Open** |
+
+**7****. ****Needs Clarification**** **
+
+| **#** | **Item Needing Clarification** | **Context** |
+| --- | --- | --- |
+| **C-01** | Can Mission Extension include an additional financial amount (in addition to duration)? | *Hassan confirmed only duration. Amount not confirmed or denied explicitly.* |
+| **C-02** | UI color/styling alignment — is Create Mission screen matching the approved reference design? | *Hassan stated adjustments are in progress. * |
